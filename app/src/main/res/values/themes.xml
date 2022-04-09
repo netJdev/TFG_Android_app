@@ -13,4 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Tema para splah screen -->
+    <style name="SplashTheme" parent="Theme.TFG_Android_app">
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+    </style>
 </resources>
