@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "523829170152",
+    "project_id": "centersport-67d05",
+    "storage_bucket": "centersport-67d05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523829170152:android:3c1e57877a5fc6a1bb9e5d",
+        "android_client_info": {
+          "package_name": "com.netjdev.tfg_android_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523829170152-60jvt988r12l83up23d7qoglkeojspuq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLMTCJWIQh3TIx56Vp6yJo3RizdbbByIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523829170152-60jvt988r12l83up23d7qoglkeojspuq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

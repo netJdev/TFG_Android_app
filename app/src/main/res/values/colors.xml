@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Colores -->
+    <color name="naranja">#FFFF9600</color>
+    <color name="naranja_claro">#FFFFC747</color>
+    <color name="naranja_oscuro">#FFC66700</color>
+
+    <color name="texto">#FFF5F5F5</color>
 </resources>

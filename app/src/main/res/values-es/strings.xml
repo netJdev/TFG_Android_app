@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TFG_Android_app</string>
+    <string name="pantalla_login">Registro</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="forgot_password">¿Has olvidado tu contraseña?</string>
+    <string name="click_here">Pulsa aquí</string>
+    <string name="login_failed">Error de inicio de sesión</string>
+    <string name="reset_email">Email para restablecer contraseña</string>
+    <string name="send">Enviar</string>
+    <string name="wrong_email">Email incorrecto</string>
+    <string name="email_sent">Email enviado</string>
+    <string name="email_not_sent">No se pudo enviar el email</string>
+    <string name="logout">Cerrar sesión</string>
+</resources>

@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">TFG_Android_app</string>
+    <string name="pantalla_login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="click_here">Click here</string>
+    <string name="login_failed">Login failed</string>
+    <string name="reset_email">Email to reset password</string>
+    <string name="send">Send</string>
+    <string name="wrong_email">Wrong email</string>
+    <string name="email_sent">Email sent</string>
+    <string name="email_not_sent">The email could not be sent</string>
+    <string name="logout">Logout</string>
 </resources>
