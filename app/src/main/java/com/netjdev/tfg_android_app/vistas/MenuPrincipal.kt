@@ -6,7 +6,6 @@ import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityMenuPrincipalBinding
 
 class MenuPrincipal : AppCompatActivity() {
@@ -17,6 +16,9 @@ class MenuPrincipal : AppCompatActivity() {
     // Variable para acceder a la autenticacion de Firebase
     private lateinit var auth: FirebaseAuth
 
+    // Variable con el email de usuario que se recibe del intent
+    private var user_email = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuPrincipalBinding.inflate(layoutInflater)
@@ -25,19 +27,34 @@ class MenuPrincipal : AppCompatActivity() {
         // Inicializar Firebase Auth
         auth = Firebase.auth
 
-        initComponents()
+        intent.getStringExtra("user_email")?.let { user_email = it }
+
+        if (user_email.isNotEmpty()) {
+            initComponents()
+        }
 
     }
 
-    private fun initComponents(){
+    private fun initComponents() {
         binding.btnLogout.setOnClickListener { logOut() }
+
+        // Recuperar datos perfil de usuario
+
+        // Chat
+        binding.btnChat.setOnClickListener { chat() }
     }
 
-    private fun logOut(){
+    private fun chat() {
+        val intent = Intent(this, ListOfChatsActivity::class.java)
+        intent.putExtra("user_email", user_email)
+        startActivity(intent)
+    }
+
+    private fun logOut() {
         // Hacer logout de la aplicacion (cuenta de Fierebase)
         auth.signOut()
         // Ir a pantalla de login
-        val intent = Intent (this, MainActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 

@@ -14,4 +14,9 @@
     <string name="email_sent">Email enviado</string>
     <string name="email_not_sent">No se pudo enviar el email</string>
     <string name="logout">Cerrar sesión</string>
+    <string name="btn_chat">Chat</string>
+    <string name="chats_load_failed">Fallo en la carga de chats</string>
+    <string name="btn_new_chat">Chat</string>
+    <string name="txt_my_msg">Mi mensaje</string>
+    <string name="txt_other_msg">Otro mensaje</string>
 </resources>

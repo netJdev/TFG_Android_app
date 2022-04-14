@@ -13,4 +13,9 @@
     <string name="email_sent">Email sent</string>
     <string name="email_not_sent">The email could not be sent</string>
     <string name="logout">Logout</string>
+    <string name="btn_chat">Chat</string>
+    <string name="chats_load_failed">Chats load failed</string>
+    <string name="btn_new_chat">Chat</string>
+    <string name="txt_my_msg">My message</string>
+    <string name="txt_other_msg">Other message</string>
 </resources>

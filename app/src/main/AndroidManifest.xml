@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG_Android_app">
         <activity
+            android:name=".vistas.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".vistas.ListOfChatsActivity"
+            android:exported="false" />
+        <activity
             android:name=".vistas.RecuperarPassword"
             android:exported="false" />
         <activity
@@ -22,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".vistas.MenuPrincipal"/>
+        <activity android:name=".vistas.MenuPrincipal" />
     </application>
 
 </manifest>

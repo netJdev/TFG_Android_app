@@ -33,13 +33,8 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         // Añadir funcionalidad a los botones
-        binding.btnLogin.setOnClickListener {
-            signIn()
-        }
-
-        binding.btnResetPassword.setOnClickListener {
-            resetPassword()
-        }
+        binding.btnLogin.setOnClickListener { signIn() }
+        binding.btnResetPassword.setOnClickListener { resetPassword() }
 
         checkUser()
     }
@@ -52,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         if (usuarioActual != null) {
             val intent = Intent(this, MenuPrincipal::class.java)
             // Pasar email del usuario registrado
-            intent.putExtra("email", usuarioActual.email)
+            intent.putExtra("user_email", usuarioActual.email)
             // Iniciar actividad
             startActivity(intent)
 
@@ -82,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetPassword() {
-        // Abre la activity para resetear contraseña
+        // Inicia la activity para resetear contraseña
         val intent = Intent(this, RecuperarPassword::class.java)
         startActivity(intent)
         finish()

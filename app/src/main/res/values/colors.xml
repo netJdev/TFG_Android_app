@@ -13,5 +13,8 @@
     <color name="naranja_claro">#FFFFC747</color>
     <color name="naranja_oscuro">#FFC66700</color>
 
+    <color name="fondo_naranja">#FFFFCB80</color>
+    <color name="fondo_gris">#FFE8E8E8</color>
+
     <color name="texto">#FFF5F5F5</color>
 </resources>
