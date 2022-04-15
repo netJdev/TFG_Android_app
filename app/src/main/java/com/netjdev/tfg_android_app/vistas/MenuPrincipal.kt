@@ -29,6 +29,8 @@ class MenuPrincipal : AppCompatActivity() {
 
         intent.getStringExtra("user_email")?.let { user_email = it }
 
+        binding.textView6.text = user_email
+
         if (user_email.isNotEmpty()) {
             initComponents()
         }

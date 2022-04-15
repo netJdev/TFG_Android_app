@@ -19,4 +19,5 @@
     <string name="btn_new_chat">Chat</string>
     <string name="txt_my_msg">Mi mensaje</string>
     <string name="txt_other_msg">Otro mensaje</string>
+    <string name="message">Mensaje</string>
 </resources>
