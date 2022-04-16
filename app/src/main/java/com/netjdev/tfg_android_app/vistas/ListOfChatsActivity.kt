@@ -100,6 +100,7 @@ class ListOfChatsActivity : AppCompatActivity() {
         intent.putExtra("chatId", chat.id)
         intent.putExtra("user", user_email)
         startActivity(intent)
+        finish()
     }
 
     private fun newChat() {
@@ -130,6 +131,10 @@ class ListOfChatsActivity : AppCompatActivity() {
         intent.putExtra("chatId", chatId)
         intent.putExtra("user", user_email)
         startActivity(intent)
+        // Si el usuario no es admin (netjdev@gmail.com) se finaliza esta activity
+        if (user_email != "netjdev@gmail.com") {
+            finish()
+        }
     }
 
     private fun newChatAdmin() {

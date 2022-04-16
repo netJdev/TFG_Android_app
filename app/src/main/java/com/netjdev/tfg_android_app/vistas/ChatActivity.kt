@@ -80,19 +80,21 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun sendMessage() {
-        val message = Message(
-            message = tvMsg.text.toString(),
-            from = user
-        )
+        // Comprobar que la caja de texto no este vacia
+        if (binding.tvMsg.text.toString() != "") {
+            val message = Message(
+                message = tvMsg.text.toString(),
+                from = user
+            )
 
-        // Escribo el mensaje en la bd, no le asigno id al documento de la coleccion messages porque
-        // para que se asigne un id dinamicamente en Firestore
-        firestore.collection("chats").document(chatId).collection("messages").document()
-            .set(message)
+            // Escribo el mensaje en la bd, no le asigno id al documento de la coleccion messages porque
+            // para que se asigne un id dinamicamente en Firestore
+            firestore.collection("chats").document(chatId).collection("messages").document()
+                .set(message)
 
-        // Borrar la caja de texto
-        tvMsg.setText("")
-
+            // Borrar la caja de texto
+            binding.tvMsg.setText("")
+        }
         // Cerrar el teclado
         val view = this.currentFocus
         view?.let { v ->
@@ -105,11 +107,6 @@ class ChatActivity : AppCompatActivity() {
     // Esta es la pantalla principal, si se pulsa volver, se sale de la app
     override fun onBackPressed() {
         super.onBackPressed()
-        if (user != "netjdev@gmail.com") {
-            val intent = Intent(this, MenuPrincipal::class.java)
-            startActivity(intent)
-            finish()
-        }
         finish()
     }
 }

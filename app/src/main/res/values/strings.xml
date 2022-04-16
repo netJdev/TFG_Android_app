@@ -19,4 +19,9 @@
     <string name="txt_my_msg">My message</string>
     <string name="txt_other_msg">Other message</string>
     <string name="message">Message</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="profile">My Profile</string>
+    <string name="classes">My classes</string>
+    <string name="payments">My payments</string>
 </resources>

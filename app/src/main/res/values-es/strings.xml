@@ -20,4 +20,9 @@
     <string name="txt_my_msg">Mi mensaje</string>
     <string name="txt_other_msg">Otro mensaje</string>
     <string name="message">Mensaje</string>
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Cerrar</string>
+    <string name="profile">Mi Perfil</string>
+    <string name="classes">Mis clases</string>
+    <string name="payments">Mis pagos</string>
 </resources>

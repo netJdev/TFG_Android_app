@@ -1,14 +1,24 @@
 package com.netjdev.tfg_android_app.vistas
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityMenuPrincipalBinding
+import kotlinx.android.synthetic.main.activity_menu_principal.*
 
-class MenuPrincipal : AppCompatActivity() {
+class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     // Variable para la vinculacion de vistas
     private lateinit var binding: ActivityMenuPrincipalBinding
@@ -19,6 +29,10 @@ class MenuPrincipal : AppCompatActivity() {
     // Variable con el email de usuario que se recibe del intent
     private var user_email = ""
 
+    // Menu lateral
+    private lateinit var drawer: DrawerLayout
+    private lateinit var toogle: ActionBarDrawerToggle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMenuPrincipalBinding.inflate(layoutInflater)
@@ -26,6 +40,28 @@ class MenuPrincipal : AppCompatActivity() {
 
         // Inicializar Firebase Auth
         auth = Firebase.auth
+
+        // Menu
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar_main)
+        setSupportActionBar(toolbar)
+
+        drawer = findViewById(R.id.drawer_layout)
+        toogle = ActionBarDrawerToggle(
+            this,
+            drawer,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawer.addDrawerListener(toogle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
+        // Traer la vista al frente
+        //-- Esta instruccion es necesaria porque en el xml activity_main_drawer, el último hijo
+        //-- de <DrawerLayout> debe ser <NavigationView/>, si no, no funciona
+        navigationView.bringToFront()
 
         intent.getStringExtra("user_email")?.let { user_email = it }
 
@@ -38,6 +74,7 @@ class MenuPrincipal : AppCompatActivity() {
     }
 
     private fun initComponents() {
+        Log.d("Sportcenter","Init menú")
         binding.btnLogout.setOnClickListener { logOut() }
 
         // Recuperar datos perfil de usuario
@@ -58,12 +95,49 @@ class MenuPrincipal : AppCompatActivity() {
         // Ir a pantalla de login
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     // Funcion para volver atras
     // Esta es la pantalla principal, si se pulsa volver, se sale de la app
     override fun onBackPressed() {
-        super.onBackPressed()
+        // Detectar si el menú lateral está abierto y cerrarlo
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)){
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }else{
+            super.onBackPressed()
+        }
         finish()
+    }
+
+    // Menú lateral
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        Log.d("Sportcenter","logout")
+        when(item.itemId){
+            R.id.nav_item_profile->Toast.makeText(this,"Item 1", Toast.LENGTH_SHORT).show()
+            R.id.nav_item_classes->Toast.makeText(this,"Item 2", Toast.LENGTH_SHORT).show()
+            R.id.nav_item_payments->Toast.makeText(this,"Item 3", Toast.LENGTH_SHORT).show()
+            R.id.nav_item_four->logOut()
+        }
+        drawer.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        toogle.syncState()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        toogle.onConfigurationChanged(newConfig)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d("Sportcenter","onOptionsItemSelected")
+        if (toogle.onOptionsItemSelected(item)){
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -12,10 +12,20 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <!-- Tema para splah screen -->
     <style name="SplashTheme" parent="Theme.TFG_Android_app">
         <item name="android:windowBackground">@drawable/splashscreen</item>
     </style>
+    <style name="Theme.TFG_Android_app.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.TFG_Android_app.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.TFG_Android_app.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
