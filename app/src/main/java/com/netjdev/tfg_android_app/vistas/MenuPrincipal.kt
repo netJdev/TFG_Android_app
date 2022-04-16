@@ -1,5 +1,6 @@
 package com.netjdev.tfg_android_app.vistas
 
+import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
@@ -110,13 +111,19 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         finish()
     }
 
+    // Carga de Activity
+    private fun loadActivity(context: Activity, activityClass: Class<ProfileActivity>) {
+        val intent = Intent(context, activityClass)
+        startActivity(intent)
+    }
+
     // Menú lateral
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         Log.d("Sportcenter","logout")
         when(item.itemId){
-            R.id.nav_item_profile->Toast.makeText(this,"Item 1", Toast.LENGTH_SHORT).show()
-            R.id.nav_item_classes->Toast.makeText(this,"Item 2", Toast.LENGTH_SHORT).show()
-            R.id.nav_item_payments->Toast.makeText(this,"Item 3", Toast.LENGTH_SHORT).show()
+            R.id.nav_item_profile->loadActivity(this, ProfileActivity::class.java)
+            R.id.nav_item_classes->loadActivity(this, ProfileActivity::class.java)
+            R.id.nav_item_payments->loadActivity(this, ProfileActivity::class.java)
             R.id.nav_item_four->logOut()
         }
         drawer.closeDrawer(GravityCompat.START)

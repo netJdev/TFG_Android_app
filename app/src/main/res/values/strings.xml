@@ -24,4 +24,10 @@
     <string name="profile">My Profile</string>
     <string name="classes">My classes</string>
     <string name="payments">My payments</string>
+    <string name="name">Name</string>
+    <string name="surname1">Surname 1</string>
+    <string name="surname2">Surname 2</string>
+    <string name="tlf" translatable="false">Tlf.</string>
+    <string name="address">Address</string>
+    <string name="membership_number">Membership number</string>
 </resources>

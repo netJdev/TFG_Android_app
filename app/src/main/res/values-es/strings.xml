@@ -25,4 +25,9 @@
     <string name="profile">Mi Perfil</string>
     <string name="classes">Mis clases</string>
     <string name="payments">Mis pagos</string>
+    <string name="name">Nombre</string>
+    <string name="surname1">Apellido 1</string>
+    <string name="surname2">Apellido 2</string>
+    <string name="address">Dirección</string>
+    <string name="membership_number">Nº socio</string>
 </resources>
