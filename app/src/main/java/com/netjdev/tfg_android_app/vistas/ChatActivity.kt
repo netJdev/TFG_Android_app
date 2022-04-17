@@ -87,7 +87,7 @@ class ChatActivity : AppCompatActivity() {
                 from = user
             )
 
-            // Escribo el mensaje en la bd, no le asigno id al documento de la coleccion messages porque
+            // Escrir el mensaje en la bd, no se le asigna id al documento de la coleccion messages
             // para que se asigne un id dinamicamente en Firestore
             firestore.collection("chats").document(chatId).collection("messages").document()
                 .set(message)

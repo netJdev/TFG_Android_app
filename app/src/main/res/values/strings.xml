@@ -30,4 +30,8 @@
     <string name="tlf" translatable="false">Tlf.</string>
     <string name="address">Address</string>
     <string name="membership_number">Membership number</string>
+    <string name="btn_editar">Edit</string>
+    <string name="btn_guardar">Save</string>
+    <string name="empty">Empty</string>
+    <string name="btn_cancelar">Cancel</string>
 </resources>

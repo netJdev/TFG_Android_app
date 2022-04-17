@@ -30,4 +30,8 @@
     <string name="surname2">Apellido 2</string>
     <string name="address">Dirección</string>
     <string name="membership_number">Nº socio</string>
+    <string name="btn_editar">Editar</string>
+    <string name="btn_guardar">Guardar</string>
+    <string name="empty">Vacío</string>
+    <string name="btn_cancelar">Cancelar</string>
 </resources>

@@ -114,6 +114,7 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     // Carga de Activity
     private fun loadActivity(context: Activity, activityClass: Class<ProfileActivity>) {
         val intent = Intent(context, activityClass)
+        intent.putExtra("user_email", user_email)
         startActivity(intent)
     }
 
