@@ -76,8 +76,6 @@ class ListOfChatsActivity : AppCompatActivity() {
                         newChatAdmin()
                     }
                 }
-                //println("****************************************CHATS: ${chats.size()}")
-                //println("****************************************ITEM COUNT: ${(listChatsRecyclerView.adapter as ChatAdapter).itemCount}")
             }
 
         // Actualizacion en tiempo real de la lista de chats

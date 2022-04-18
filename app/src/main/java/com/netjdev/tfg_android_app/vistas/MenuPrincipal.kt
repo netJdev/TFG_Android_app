@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -75,18 +74,22 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun initComponents() {
-        Log.d("Sportcenter","Init menú")
         binding.btnLogout.setOnClickListener { logOut() }
 
-        // Recuperar datos perfil de usuario
-
-        // Chat
+        // Botones
         binding.btnChat.setOnClickListener { chat() }
+        binding.btnDocs.setOnClickListener { documents() }
     }
 
     private fun chat() {
         val intent = Intent(this, ListOfChatsActivity::class.java)
         intent.putExtra("user_email", user_email)
+        startActivity(intent)
+    }
+
+    private fun documents() {
+        val intent = Intent(this, ListOfDocCategoryActivity::class.java)
+        //intent.putExtra("user_email", user_email)
         startActivity(intent)
     }
 

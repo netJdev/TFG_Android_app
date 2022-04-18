@@ -9,10 +9,14 @@
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.296" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/splashscreen.xml" value="0.34" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_chat.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_document_type.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_list_of_chats.xml" value="0.33" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_list_of_doc_category.xml" value="0.3442028985507246" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_list_of_documents.xml" value="0.24427083333333333" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_menu_lateral.xml" value="0.358695652173913" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_menu_principal.xml" value="0.25" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_pdf_viewer.xml" value="0.24427083333333333" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_profile.xml" value="0.33" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_recuperar_password.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/app_bar_main.xml" value="0.358695652173913" />
@@ -21,6 +25,9 @@
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/fragment_profile.xml" value="0.358695652173913" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/header.xml" value="0.358695652173913" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_chat.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_doc_category.xml" value="0.3442028985507246" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_doc_type.xml" value="0.3442028985507246" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_document.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_message.xml" value="0.358695652173913" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/nav_header_main.xml" value="0.358695652173913" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />

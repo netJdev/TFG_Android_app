@@ -127,6 +127,7 @@ class ProfileActivity : AppCompatActivity() {
             name = binding.editTextName.text.toString(),
             surname1 = binding.editTextSurname1.text.toString(),
             surname2 = binding.editTextSurname2.text.toString(),
+            // Antes de guargar el número se eliminan los espacios en blanco para evitar el
             tlf = binding.editTextPhone.text.toString().replace("\\s".toRegex(), "").toInt(),
             address = binding.editTextAddress.text.toString(),
             num_socio = binding.editTextNumSocio.text.toString().toInt()
@@ -135,22 +136,12 @@ class ProfileActivity : AppCompatActivity() {
             .document("user_profile")
             .set(profile)
 
-        // Dehabilitar edit texts
-        binding.editTextName.isEnabled = false
-        binding.editTextSurname1.isEnabled = false
-        binding.editTextSurname2.isEnabled = false
-        binding.editTextPhone.isEnabled = false
-        binding.editTextAddress.isEnabled = false
-
-        // Ocultar botones cancelar y guardar y mostrar boton editar
-        binding.btnCancelar.visibility = View.INVISIBLE
-        binding.btnGuardar.visibility = View.INVISIBLE
-        binding.btnEditar.visibility = View.VISIBLE
+        disableEditData()
 
         loadFirestoreUserData()
     }
 
-    private fun enableEditData(){
+    private fun enableEditData() {
         // Habilitar edit texts
         binding.editTextName.isEnabled = true
         binding.editTextSurname1.isEnabled = true
@@ -162,6 +153,20 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnCancelar.visibility = View.VISIBLE
         binding.btnGuardar.visibility = View.VISIBLE
         binding.btnEditar.visibility = View.INVISIBLE
+    }
+
+    private fun disableEditData() {
+        // Dehabilitar edit texts
+        binding.editTextName.isEnabled = false
+        binding.editTextSurname1.isEnabled = false
+        binding.editTextSurname2.isEnabled = false
+        binding.editTextPhone.isEnabled = false
+        binding.editTextAddress.isEnabled = false
+
+        // Ocultar botones cancelar y guardar y mostrar boton editar
+        binding.btnCancelar.visibility = View.INVISIBLE
+        binding.btnGuardar.visibility = View.INVISIBLE
+        binding.btnEditar.visibility = View.VISIBLE
     }
 
     private fun removeSharedPreferences() {

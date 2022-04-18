@@ -34,4 +34,5 @@
     <string name="btn_guardar">Guardar</string>
     <string name="empty">Vacío</string>
     <string name="btn_cancelar">Cancelar</string>
+    <string name="btn_docs">Documentos</string>
 </resources>
