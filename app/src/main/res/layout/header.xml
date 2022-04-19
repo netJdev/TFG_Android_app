@@ -14,6 +14,7 @@
         android:textSize="20dp"
         android:textColor="@color/texto"
         android:gravity="center_vertical"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

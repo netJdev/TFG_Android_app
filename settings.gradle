@@ -10,6 +10,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        //Añadido para poder usar la libreria androidPdfViewer
+        gradlePluginPortal()
     }
 }
 rootProject.name = "TFG_Android_app"

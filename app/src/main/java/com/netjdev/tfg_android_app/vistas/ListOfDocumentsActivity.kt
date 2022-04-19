@@ -14,6 +14,7 @@ import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.controladores.DocumentAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityListOfDocumentsBinding
 import com.netjdev.tfg_android_app.modelos.Document
+import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_list_of_documents.*
 
 class ListOfDocumentsActivity : AppCompatActivity() {
@@ -55,11 +56,15 @@ class ListOfDocumentsActivity : AppCompatActivity() {
                 val listDocs: MutableList<Document> = mutableListOf()
                 items.forEach { item ->
                     val document = Document(
-                        name = item.name
+                        name = item.name,
+                        cleanName = Utilities.cleanString(item.name)
                     )
                     listDocs.add(document)
                 }
-                (listDocumentsRecyclerView.adapter as DocumentAdapter).setData(listDocs)
+                //listDocs.sortedByDescending { it.name }
+                val listaOrdenada = listDocs.sortedBy { it.cleanName }
+                //val listaOrdenada2 = listDocs.map { it.name }
+                (listDocumentsRecyclerView.adapter as DocumentAdapter).setData(listaOrdenada)
               //(listDocTypeRecyclerView.adapter as DocCategoryAdapter).setData(listDocs)
             }
             .addOnFailureListener {
@@ -69,8 +74,9 @@ class ListOfDocumentsActivity : AppCompatActivity() {
     }
 
     private fun documentSelected(document: Document) {
-        val intent = Intent(this, ListOfDocumentsActivity::class.java)
-        intent.putExtra("name", document.name)
+        val intent = Intent(this, PdfViewerActivity::class.java)
+        intent.putExtra("category_name", categoryName)
+        intent.putExtra("document_name", document.name)
         startActivity(intent)
     }
 }
