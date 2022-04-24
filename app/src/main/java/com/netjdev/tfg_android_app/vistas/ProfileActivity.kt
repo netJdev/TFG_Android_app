@@ -156,7 +156,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun disableEditData() {
-        // Dehabilitar edit texts
+        // Deshabilitar edit texts
         binding.editTextName.isEnabled = false
         binding.editTextSurname1.isEnabled = false
         binding.editTextSurname2.isEnabled = false

@@ -35,4 +35,25 @@
     <string name="empty">Empty</string>
     <string name="btn_cancelar">Cancel</string>
     <string name="btn_docs">Documents</string>
+    <string name="btn_notifications">Notifications</string>
+    <string name="group_classes">Group classes</string>
+    <string name="letter_monday">M</string>
+    <string name="letter_tuesday">T</string>
+    <string name="letter_wednesday">W</string>
+    <string name="letter_thursday">T</string>
+    <string name="letter_friday">F</string>
+    <string name="letter_saturday">S</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="monday_eng" translatable="false">monday</string>
+    <string name="tuesday_eng" translatable="false">tuesday</string>
+    <string name="wednesday_eng" translatable="false">wednesday</string>
+    <string name="thursday_eng" translatable="false">thursday</string>
+    <string name="friday_eng" translatable="false">friday</string>
+    <string name="saturday_eng">Saturday</string>
+    <string name="confirm_reservation">Confirm reservation</string>
 </resources>

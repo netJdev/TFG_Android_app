@@ -27,7 +27,12 @@
         app:itemIconTint="@color/naranja"
         app:itemTextColor="@color/texto_oscuro"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include
+        layout="@layout/menu_principal_include"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!--<androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -81,5 +86,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </androidx.drawerlayout.widget.DrawerLayout>

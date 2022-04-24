@@ -3,6 +3,7 @@ package com.netjdev.tfg_android_app.vistas
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isEmpty
@@ -64,6 +65,7 @@ class ListOfChatsActivity : AppCompatActivity() {
             .addOnSuccessListener { chats ->
                 // Casting de los documentos descargados de la coleccion a objetos Chat
                 val listChats = chats.toObjects(Chat::class.java)
+
                 // Pasar al adapter del RecyclerView los datos que se cargaran (lista de chats)
                 (listChatsRecyclerView.adapter as ChatAdapter).setData(listChats)
 
