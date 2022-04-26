@@ -29,7 +29,6 @@ class ChatAdapter(val chatClick: (Chat) -> Unit) :
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         //holder.itemView.chatNameText.text = chats[position].id
-        //holder.itemView.usersTextView.text = chats[position].users.toString()
         holder.itemView.docTypeNameText.text = chats[position].users.toString()
 
         holder.itemView.setOnClickListener {

@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
@@ -23,10 +22,15 @@ class ListOfGroupClassesActivity : AppCompatActivity() {
     // Instancia de Firebase Storage
     private var firestore = Firebase.firestore
 
+    // Id de usuario (email)
+    private var user_email = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListOfGroupClassesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        intent.getStringExtra("user_email")?.let { user_email = it }
 
         initComponents()
     }
@@ -55,6 +59,8 @@ class ListOfGroupClassesActivity : AppCompatActivity() {
     private fun groupClassSelected(groupClass: GroupClass) {
         val intent = Intent(this, ClassReserveActivity::class.java)
         intent.putExtra("class_name", groupClass.name)
+        intent.putExtra("user_email", user_email)
         startActivity(intent)
+        finish()
     }
 }

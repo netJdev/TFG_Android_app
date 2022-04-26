@@ -167,7 +167,7 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     private fun groupClasses() {
         val intent = Intent(this, ListOfGroupClassesActivity::class.java)
-        //intent.putExtra("user_email", user_email)
+        intent.putExtra("user_email", user_email)
         startActivity(intent)
     }
 
@@ -177,7 +177,6 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         // Ir a pantalla de login
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        finish()
     }
 
     // Funcion para volver atras
@@ -193,7 +192,17 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     // Carga de Activity
-    private fun loadActivity(context: Activity, activityClass: Class<ProfileActivity>) {
+    private fun loadProfileActivity(context: Activity, activityClass: Class<ProfileActivity>) {
+        val intent = Intent(context, activityClass)
+        intent.putExtra("user_email", user_email)
+        startActivity(intent)
+    }
+
+    // Carga de Activity
+    private fun loadReservedClassesActivity(
+        context: Activity,
+        activityClass: Class<ListOfReservedClassesActivity>
+    ) {
         val intent = Intent(context, activityClass)
         intent.putExtra("user_email", user_email)
         startActivity(intent)
@@ -203,9 +212,12 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         Log.d("Sportcenter", "logout")
         when (item.itemId) {
-            R.id.nav_item_profile -> loadActivity(this, ProfileActivity::class.java)
-            R.id.nav_item_classes -> loadActivity(this, ProfileActivity::class.java)
-            R.id.nav_item_payments -> loadActivity(this, ProfileActivity::class.java)
+            R.id.nav_item_profile -> loadProfileActivity(this, ProfileActivity::class.java)
+            R.id.nav_item_classes -> loadReservedClassesActivity(
+                this,
+                ListOfReservedClassesActivity::class.java
+            )
+            R.id.nav_item_payments -> loadProfileActivity(this, ProfileActivity::class.java)
             R.id.nav_item_four -> logOut()
         }
         drawer.closeDrawer(GravityCompat.START)

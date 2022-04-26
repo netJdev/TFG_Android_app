@@ -1,6 +1,5 @@
 package com.netjdev.tfg_android_app.controladores
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +35,7 @@ class TimeAdapter(val timeClick: (ClassReserveTime) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: TimeAdapter.TimeViewHolder, position: Int) {
-        holder.itemView.timeNameText.text = timeReserves[position].name
+        holder.itemView.txtTime.text = timeReserves[position].name
 
         val plazas = timeReserves[position].plazas.toInt()
 
@@ -46,17 +45,15 @@ class TimeAdapter(val timeClick: (ClassReserveTime) -> Unit) :
         calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
         calendar.time = currentDate
         // Sumar dias para hacer pruebas
-        calendar.add(Calendar.DATE, 3)
+        //calendar.add(Calendar.DATE, 1)
 
         val hora = calendar.get(Calendar.HOUR_OF_DAY).toInt()
         // Marcar horario limite en una hora menos
         val horaLimite = timeReserves[position].id.toInt() - 1
         val currentDay = calendar.get(Calendar.DAY_OF_WEEK)
-        //Log.d("Sport", "Plazas: ${plazas}")
-        //Log.d("Sport", "Hora: ${hora}")
-        //Log.d("Sport", "Hora limite: ${horaLimite}")
-        Log.d("Sport", "WEEKDAY: ${weekday}")
-        Log.d("Sport", "CURRENTDAY: ${currentDay}")
+
+        //Log.d("Sport", "WEEKDAY: ${weekday}")
+        //Log.d("Sport", "CURRENTDAY: ${currentDay}")
 
         // Los botones por defecto se deshabilitan, solo se habilitan si se cumplen las condiciones siguientes
         holder.itemView.btnAddReserve.isEnabled = false
@@ -83,15 +80,6 @@ class TimeAdapter(val timeClick: (ClassReserveTime) -> Unit) :
                 }
             }
         }
-
-        /*if (plazas > 0 && hora < horaLimite) {
-            holder.itemView.btnAddReserve.setOnClickListener {
-                timeClick(timeReserves[position])
-            }
-        } else {
-            // Deshabilitar boton reserva
-            holder.itemView.btnAddReserve.isEnabled = false
-        }*/
     }
 
     override fun getItemCount(): Int {

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TFG_Android_app">
         <activity
+            android:name=".vistas.ListOfReservedClassesActivity"
+            android:exported="false" />
+        <activity
             android:name=".vistas.ConfirmReservationActivity"
             android:exported="false" />
         <activity

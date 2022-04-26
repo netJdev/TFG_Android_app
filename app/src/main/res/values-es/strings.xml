@@ -51,4 +51,8 @@
     <string name="saturday_eng">Sábado</string>
     <string name="saturday">Sábado</string>
     <string name="confirm_reservation">Confirmar reserva</string>
+    <string name="sunday">Domingo</string>
+    <string name="class_reservation_completed">Reserva de clase completada</string>
+    <string name="close">Cerrar</string>
+    <string name="my_classes">Mis clases</string>
 </resources>

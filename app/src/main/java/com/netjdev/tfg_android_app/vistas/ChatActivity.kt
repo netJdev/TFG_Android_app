@@ -86,7 +86,7 @@ class ChatActivity : AppCompatActivity() {
                 from = user
             )
 
-            // Escrir el mensaje en la bd, no se le asigna id al documento de la coleccion messages
+            // Escribir el mensaje en la bd, no se le asigna id al documento de la coleccion messages
             // para que se asigne un id dinamicamente en Firestore
             firestore.collection("chats").document(chatId).collection("messages").document()
                 .set(message)
@@ -103,7 +103,6 @@ class ChatActivity : AppCompatActivity() {
     }
 
     // Funcion para volver atras
-    // Esta es la pantalla principal, si se pulsa volver, se sale de la app
     override fun onBackPressed() {
         super.onBackPressed()
         finish()

@@ -56,4 +56,8 @@
     <string name="friday_eng" translatable="false">friday</string>
     <string name="saturday_eng">Saturday</string>
     <string name="confirm_reservation">Confirm reservation</string>
+    <string name="sunday">Sunday</string>
+    <string name="class_reservation_completed">Class reservation completed</string>
+    <string name="close">Close</string>
+    <string name="my_classes">My classes</string>
 </resources>
