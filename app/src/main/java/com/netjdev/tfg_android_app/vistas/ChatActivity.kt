@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.netjdev.tfg_android_app.controladores.MessageAdapter
+import com.netjdev.tfg_android_app.adapters.MessageAdapter
 import com.netjdev.tfg_android_app.modelos.Message
 import com.netjdev.tfg_android_app.databinding.ActivityChatBinding
 import kotlinx.android.synthetic.main.activity_chat.*

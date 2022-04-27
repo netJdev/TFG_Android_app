@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.netjdev.tfg_android_app.R
-import com.netjdev.tfg_android_app.controladores.GroupClassAdapter
+import com.netjdev.tfg_android_app.adapters.GroupClassAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityListOfGroupClassesBinding
 import com.netjdev.tfg_android_app.modelos.GroupClass
 import kotlinx.android.synthetic.main.activity_list_of_group_classes.*

@@ -1,4 +1,4 @@
-package com.netjdev.tfg_android_app.controladores
+package com.netjdev.tfg_android_app.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.modelos.Message
 import kotlinx.android.synthetic.main.item_message.view.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class MessageAdapter(private val user: String) :

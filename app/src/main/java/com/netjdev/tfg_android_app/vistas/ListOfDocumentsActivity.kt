@@ -11,7 +11,7 @@ import com.google.firebase.storage.ktx.component1
 import com.google.firebase.storage.ktx.component2
 import com.google.firebase.storage.ktx.storage
 import com.netjdev.tfg_android_app.R
-import com.netjdev.tfg_android_app.controladores.DocumentAdapter
+import com.netjdev.tfg_android_app.adapters.DocumentAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityListOfDocumentsBinding
 import com.netjdev.tfg_android_app.modelos.Document
 import com.netjdev.tfg_android_app.util.Utilities

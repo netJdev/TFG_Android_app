@@ -40,5 +40,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // Crear notificacion
 
+        val intent = Intent(this, NotificationsActivity::class.java)
+        intent.putExtra("message_name", message.notification?.title.toString())
+        intent.putExtra("message_content", message.notification?.body.toString())
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+
     }
 }

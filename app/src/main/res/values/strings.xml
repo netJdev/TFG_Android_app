@@ -60,4 +60,7 @@
     <string name="class_reservation_completed">Class reservation completed</string>
     <string name="close">Close</string>
     <string name="my_classes">My classes</string>
+    <string name="class_reservation_removed">Class reservation removed</string>
+    <string name="error_ocurred">An error has occurred, please try again later</string>
+    <string name="app_name_2" translatable="false">Sport Center</string>
 </resources>

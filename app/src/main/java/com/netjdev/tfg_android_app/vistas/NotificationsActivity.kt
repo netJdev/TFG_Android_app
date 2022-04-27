@@ -3,7 +3,6 @@ package com.netjdev.tfg_android_app.vistas
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.netjdev.tfg_android_app.databinding.ActivityMenuPrincipalBinding
 import com.netjdev.tfg_android_app.databinding.ActivityNotificationsBinding
 
 class NotificationsActivity : AppCompatActivity() {
@@ -28,11 +27,7 @@ class NotificationsActivity : AppCompatActivity() {
             binding.txtMessageContent.text = message_content
         }
 
-
-
-        binding.editTextMessageName.setText(message_content)
-
-        Log.d("Sport", "Notification activity Nombre: ${message_name}")
-        Log.d("Sport", "Notificacion activity Cuerpo: ${message_content}")
+        //Log.d("Sport", "Notification activity Nombre: ${message_name}")
+        //Log.d("Sport", "Notificacion activity Cuerpo: ${message_content}")
     }
 }

@@ -26,6 +26,9 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="Theme.TFG_Android_app.AppBarOverlay"
-        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    <item name="android:tint">@color/white</item>
+    </style>
     <style name="Theme.TFG_Android_app.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

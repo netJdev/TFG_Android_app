@@ -1,4 +1,4 @@
-package com.netjdev.tfg_android_app.controladores
+package com.netjdev.tfg_android_app.adapters
 
 import android.view.LayoutInflater
 import android.view.View

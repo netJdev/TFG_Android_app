@@ -1,4 +1,4 @@
-package com.netjdev.tfg_android_app.controladores
+package com.netjdev.tfg_android_app.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.modelos.UserClass
-import kotlinx.android.synthetic.main.activity_profile.view.*
 import kotlinx.android.synthetic.main.item_user_class.view.*
 
 class ReservedClassAdapter(val reservedClassClick: (UserClass) -> Unit) :

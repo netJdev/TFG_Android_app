@@ -13,7 +13,7 @@ import com.netjdev.tfg_android_app.databinding.ActivityListOfDocCategoryBinding
 //
 import com.google.firebase.storage.ktx.component1
 import com.google.firebase.storage.ktx.component2
-import com.netjdev.tfg_android_app.controladores.DocCategoryAdapter
+import com.netjdev.tfg_android_app.adapters.DocCategoryAdapter
 import com.netjdev.tfg_android_app.modelos.DocCategory
 import kotlinx.android.synthetic.main.activity_list_of_doc_category.*
 

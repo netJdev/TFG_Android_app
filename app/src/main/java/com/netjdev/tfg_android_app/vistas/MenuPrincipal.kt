@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -78,8 +79,8 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         intent.getStringExtra("user_email")?.let { user_email = it }
 
         //binding.textView6.text = user_email
-        val txtview6 = findViewById<TextView>(R.id.textView6)
-        textView.text = user_email
+        //val txtview6 = findViewById<TextView>(R.id.textView6)
+        //textView.text = user_email
 
         if (user_email.isNotEmpty()) {
             //notifications()
@@ -126,10 +127,6 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         val headerView: View = navigationView.getHeaderView(0)
         val userEmail: TextView = headerView.findViewById(R.id.nav_header_textView)
         userEmail.text = user_email
-
-        //binding.btnLogout.setOnClickListener { logOut() }
-        val btnLogOut = findViewById<Button>(R.id.btnLogout)
-        btnLogOut.setOnClickListener { logOut() }
 
         // Botones
         //binding.btnChat.setOnClickListener { chat() }

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.netjdev.tfg_android_app.R
-import com.netjdev.tfg_android_app.controladores.ChatAdapter
+import com.netjdev.tfg_android_app.adapters.ChatAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityListOfChatsBinding
 import com.netjdev.tfg_android_app.modelos.Chat
 import kotlinx.android.synthetic.main.activity_list_of_chats.*
@@ -42,8 +42,8 @@ class ListOfChatsActivity : AppCompatActivity() {
 
         binding.btnNewChat.setOnClickListener { newChat() }
 
-        // Ocultar componentes del activiti si el user no es admin (es solo estetico)
-        if (user_email != "netjdev@gmail.com") {
+        // Ocultar componentes del activiti si el user no es admin
+        if (user_email != "admin@email.com") {
             binding.newChatText.visibility = View.INVISIBLE
             binding.btnNewChat.visibility = View.INVISIBLE
             binding.listChatsRecyclerView.visibility = View.INVISIBLE
@@ -68,7 +68,7 @@ class ListOfChatsActivity : AppCompatActivity() {
                 (listChatsRecyclerView.adapter as ChatAdapter).setData(listChats)
 
                 // Si el user no es el admin, se salta este activity y pasa directamente al chat
-                if (user_email != "netjdev@gmail.com") {
+                if (user_email != "admin@email.com") {
                     if (chats.size()!=0){
                         chatSelected(listChats[0])
                     }else{
@@ -130,7 +130,7 @@ class ListOfChatsActivity : AppCompatActivity() {
         intent.putExtra("user", user_email)
         startActivity(intent)
         // Si el usuario no es admin (netjdev@gmail.com) se finaliza esta activity
-        if (user_email != "netjdev@gmail.com") {
+        if (user_email != "admin@email.com") {
             finish()
         }
     }
@@ -139,7 +139,7 @@ class ListOfChatsActivity : AppCompatActivity() {
         // Crear una variable unica que sirve como identificador del chat
         val chatId = UUID.randomUUID().toString()
         // Email del otro usuario, el otro miembro del chat
-        val otherUser = "netjdev@gmail.com"
+        val otherUser = "admin@email.com"
         // Lista de usuarios (los dos miembros del chat)
         val users = listOf(user_email, otherUser)
 

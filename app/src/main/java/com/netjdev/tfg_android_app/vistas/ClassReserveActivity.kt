@@ -5,13 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.Query
 import com.netjdev.tfg_android_app.R
-import com.netjdev.tfg_android_app.controladores.TimeAdapter
+import com.netjdev.tfg_android_app.adapters.TimeAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityClassReserveBinding
 import com.netjdev.tfg_android_app.modelos.ClassReserveDay
 import com.netjdev.tfg_android_app.modelos.ClassReserveTime
