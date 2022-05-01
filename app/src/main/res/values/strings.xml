@@ -54,7 +54,7 @@
     <string name="wednesday_eng" translatable="false">wednesday</string>
     <string name="thursday_eng" translatable="false">thursday</string>
     <string name="friday_eng" translatable="false">friday</string>
-    <string name="saturday_eng">Saturday</string>
+    <string name="saturday_eng" translatable="false">saturday</string>
     <string name="confirm_reservation">Confirm reservation</string>
     <string name="sunday">Sunday</string>
     <string name="class_reservation_completed">Class reservation completed</string>

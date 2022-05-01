@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
+import com.netjdev.tfg_android_app.BuildConfig
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityMenuPrincipalBinding
 import kotlinx.android.synthetic.main.activity_menu_principal.*
@@ -112,6 +113,9 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun initComponents() {
+        // Id de la aplicación
+        Log.d("Sport", "Package Name: ${BuildConfig.APPLICATION_ID}")
+
         // Recibir data de notificacion
         if (intent.extras != null) {
             val title = intent.extras!!["title"].toString()
@@ -207,7 +211,6 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     // Menú lateral
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        Log.d("Sportcenter", "logout")
         when (item.itemId) {
             R.id.nav_item_profile -> loadProfileActivity(this, ProfileActivity::class.java)
             R.id.nav_item_classes -> loadReservedClassesActivity(

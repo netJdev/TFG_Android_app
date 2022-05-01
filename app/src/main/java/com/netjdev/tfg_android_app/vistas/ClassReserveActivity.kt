@@ -91,6 +91,7 @@ class ClassReserveActivity : AppCompatActivity() {
             .addOnSuccessListener { classes ->
                 listDays = classes.toObjects(ClassReserveDay::class.java)
 
+                Log.d("Sport", "Lista de dias: ${listDays}")
                 // Activar los botones en funcion de la lista de dias
                 showBtnDays()
             }
@@ -112,7 +113,7 @@ class ClassReserveActivity : AppCompatActivity() {
             //calendar.add(Calendar.DATE, 1)
             val weekday = calendar.get(Calendar.DAY_OF_WEEK)
 
-            //Log.d("Sport", "Date: ${currentDate}")
+            //Log.d("Sport", "Dia id: ${day.id}")
             //Log.d("Sport", "Weekday: ${weekday}")
 
             when (day.name) {
@@ -193,7 +194,7 @@ class ClassReserveActivity : AppCompatActivity() {
             //VERSION.SDK_INT < O
         }*/
 
-        // Añadri día con letra
+        // Añadir día con letra
         var diaLetra = ""
         when (diaSeleccionado) {
             1 -> {
