@@ -142,6 +142,9 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         //
         val btnActivities = findViewById<Button>(R.id.btnActivities)
         btnActivities.setOnClickListener { groupClasses() }
+        //
+        val btnPayments = findViewById<Button>(R.id.btnPayments)
+        btnPayments.setOnClickListener { payments() }
 
         btnNotifications = findViewById(R.id.btnNotifications)
         btnNotifications.setOnClickListener { notificationsBTN() }
@@ -168,6 +171,12 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     private fun groupClasses() {
         val intent = Intent(this, ListOfGroupClassesActivity::class.java)
+        intent.putExtra("user_email", user_email)
+        startActivity(intent)
+    }
+
+    private fun payments() {
+        val intent = Intent(this, StripeActivity::class.java)
         intent.putExtra("user_email", user_email)
         startActivity(intent)
     }

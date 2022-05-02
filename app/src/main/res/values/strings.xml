@@ -63,4 +63,6 @@
     <string name="class_reservation_removed">Class reservation removed</string>
     <string name="error_ocurred">An error has occurred, please try again later</string>
     <string name="app_name_2" translatable="false">Sport Center</string>
+    <string name="btn_payments">Payments</string>
+    <string name="btn_pay">Pay</string>
 </resources>

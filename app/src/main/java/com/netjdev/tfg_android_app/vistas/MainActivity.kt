@@ -3,16 +3,14 @@ package com.netjdev.tfg_android_app.vistas
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.preference.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityMainBinding
-import com.netjdev.tfg_android_app.modelos.User
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnResetPassword.setOnClickListener { resetPassword() }
 
         checkUser()
+
     }
 
     private fun checkUser() {

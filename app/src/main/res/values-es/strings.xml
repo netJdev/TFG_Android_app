@@ -56,4 +56,6 @@
     <string name="my_classes">Mis clases</string>
     <string name="class_reservation_removed">Reserva de clase eliminada</string>
     <string name="error_ocurred">Se ha producido un error, por favor intentelo más tarde</string>
+    <string name="btn_payments">Pagos</string>
+    <string name="btn_pay">Pagar</string>
 </resources>
