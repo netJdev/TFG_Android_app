@@ -65,4 +65,22 @@
     <string name="app_name_2" translatable="false">Sport Center</string>
     <string name="btn_payments">Payments</string>
     <string name="btn_pay">Pay</string>
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+    <string name="current_fee">Current fee</string>
+    <string name="currency_symbol">$</string>
+    <string name="confirm_pay">Confirm Pay</string>
+    <string name="class_reservation_incompleted">An error has occurred please try again later</string>
+    <string name="payment_completed">Payment completed</string>
+    <string name="payment_incomplete">An error has occurred please try again later</string>
 </resources>

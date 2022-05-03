@@ -4,5 +4,6 @@ import java.util.*
 
 data class Pago(
     var fechaPago: Date = Date(),
-    var cuotaPagada: Date ?= null
+    var cuotaPagada: Date ?= null,
+    var cantidad: String = ""
 )

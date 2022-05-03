@@ -4,21 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.core.view.GravityCompat
-import androidx.core.view.isVisible
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityConfirmReservationBinding
-import kotlinx.android.synthetic.main.activity_menu_principal.*
 
 class ConfirmReservationActivity : AppCompatActivity() {
 
     // Variable para la vinculacion de vistas
     private lateinit var binding: ActivityConfirmReservationBinding
-
-    // Instancia de Firebase Storage
-    private var firestore = Firebase.firestore
 
     // Variable que guarda el estado de la reserva (correcto/incorrecto)
     private var estado = ""
@@ -50,8 +44,10 @@ class ConfirmReservationActivity : AppCompatActivity() {
 
         if (estado == "correcto") {
             binding.imgCorrecto.visibility = View.VISIBLE
+            binding.txtConfirm.text = getString(R.string.class_reservation_completed)
         } else {
             binding.imgIncorrecto.visibility = View.VISIBLE
+            binding.txtConfirm.text = getString(R.string.class_reservation_incompleted)
         }
     }
 

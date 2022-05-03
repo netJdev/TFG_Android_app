@@ -11,7 +11,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         // Añadido para poder usar la libreria paypal
-        maven {
+        /*maven {
             url "https://cardinalcommerceprod.jfrog.io/artifactory/android"
             credentials {
                 // Be sure to add these non-sensitive credentials in order to retrieve dependencies from
@@ -21,7 +21,7 @@ dependencyResolutionManagement {
                 username mavenUsername
                 password mavenPassword
             }
-        }
+        }*/
         //Añadido para poder usar la libreria androidPdfViewer
         gradlePluginPortal()
     }

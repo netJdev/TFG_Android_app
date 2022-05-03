@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vistas.ConfirmReservationActivity">
+    tools:context=".vistas.ConfirmPayActivity">
 
     <include
         android:id="@+id/include"
@@ -13,38 +13,38 @@
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/imgIncorrecto"
+        android:id="@+id/imgPayIncorrecto"
         android:layout_width="312dp"
         android:layout_height="312dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtConfirm"
+        app:layout_constraintBottom_toTopOf="@+id/txtPayConfirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include"
         app:srcCompat="@drawable/ic_incorrecto" />
 
     <TextView
-        android:id="@+id/txtConfirm"
+        android:id="@+id/txtPayConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/class_reservation_completed"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCloseConfirm"
+        app:layout_constraintBottom_toTopOf="@+id/btnClosePayConfirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgIncorrecto" />
+        app:layout_constraintTop_toBottomOf="@+id/imgPayIncorrecto" />
 
     <ImageView
-        android:id="@+id/imgCorrecto"
+        android:id="@+id/imgPayCorrecto"
         android:layout_width="312dp"
         android:layout_height="312dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imgIncorrecto"
+        app:layout_constraintTop_toTopOf="@+id/imgPayIncorrecto"
         app:srcCompat="@drawable/ic_correcto" />
 
     <Button
-        android:id="@+id/btnCloseConfirm"
+        android:id="@+id/btnClosePayConfirm"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -53,6 +53,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtConfirm" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPayConfirm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

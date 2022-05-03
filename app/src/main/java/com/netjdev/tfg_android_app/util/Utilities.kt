@@ -1,6 +1,6 @@
 package com.netjdev.tfg_android_app.util
 
-import com.netjdev.tfg_android_app.modelos.Document
+import java.util.*
 
 class Utilities {
     companion object {
@@ -10,6 +10,10 @@ class Utilities {
             textClean = textClean.replace("\\-".toRegex(), " ")
             textClean = textClean.lowercase()
             return textClean
+        }
+
+        fun getMonthName(calendar: Calendar): String {
+            return calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH)!!
         }
     }
 

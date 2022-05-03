@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable-anydpi/ic_payments.xml" value="0.243" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/fondo_btn_cancelar.xml" value="0.296" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/fondo_doc_page.xml" value="0.221" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/fondo_my_msg.xml" value="0.243" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/fondo_other_msg.xml" value="0.243" />
@@ -11,6 +12,7 @@
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/splashscreen.xml" value="0.34" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_chat.xml" value="0.358695652173913" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_class_reserve.xml" value="0.24427083333333333" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_confirm_pay.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_confirm_reservation.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_document_type.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_group_activities.xml" value="0.24427083333333333" />
@@ -18,6 +20,7 @@
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_list_of_doc_category.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_list_of_documents.xml" value="0.24427083333333333" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_list_of_group_classes.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_list_of_payments.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_list_of_reserved_classes.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/activity_menu_lateral.xml" value="0.358695652173913" />
@@ -39,6 +42,7 @@
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_document.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_group_class.xml" value="0.24427083333333333" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_message.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_payment.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_time.xml" value="0.24427083333333333" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_user_class.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/menu_principal_include.xml" value="0.3442028985507246" />

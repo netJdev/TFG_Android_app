@@ -1,12 +1,9 @@
 package com.netjdev.tfg_android_app.vistas
 
-import android.graphics.Typeface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import com.android.volley.Request
@@ -19,6 +16,7 @@ import com.google.firebase.ktx.Firebase
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityStripeBinding
 import com.netjdev.tfg_android_app.modelos.Pago
+import com.netjdev.tfg_android_app.util.Utilities
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
@@ -43,7 +41,13 @@ class StripeActivity : AppCompatActivity() {
     private lateinit var calendar: Calendar
 
     // Fecha cuota a pagar
-    private lateinit var cuotaPagar: Calendar
+    private lateinit var cuotaActual: Calendar
+    // Precio cuota
+    // La pasarela de pago Stripe.com considera los dos últimos digitos como decimales, así que al
+    // hacer el pago se añaden dos 0 al final del precio
+    private var precioCuota = 45
+    // Habilitar pago
+    private var habilitarPago = false
 
     val SECRET_KEY =
         "sk_test_51Kuho7GH8t9oyfbUPyOwI7oM0ywqiiHL3MikRUZhOvnFGyCw3AXAxVUJMGuk95EfRoroY8WCvSZiXIHXCmtze5eS00kIJOsDB6"
@@ -77,76 +81,44 @@ class StripeActivity : AppCompatActivity() {
         val text_header: TextView = findViewById(R.id.txtHeader)
         text_header.text = getString(R.string.payments)
 
-        // Inicia el prceso de obtención de credenciales para realizar el pago
-        //getCustomerID()
+        binding.btnCancelPay.setOnClickListener { onBackPressed() }
+
+        // Inicia el prceso de obtención de credenciales para realizar el pago con Stripe
+        getCustomerID()
 
         // Realizar pago
         binding.btnPay.setOnClickListener { paymentFlow() }
+        binding.btnPay.isEnabled = false
 
         // Inicializar calendar
-        calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
+        //calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
+        calendar = Calendar.getInstance()
         calendar.time = currentDate
 
-        // Spinner
-        val meses = mutableListOf<String>(
-            "1 mes - 35€",
-            "2 meses - 65€",
-            "3 meses - 95€"
-        )
-
-        val adapter: ArrayAdapter<String> = object : ArrayAdapter<String>(
-            this,
-            android.R.layout.simple_spinner_dropdown_item,
-            meses
-        ) {
-            override fun getDropDownView(
-                position: Int,
-                convertView: View?,
-                parent: ViewGroup
-            ): View {
-                val view: TextView =
-                    super.getDropDownView(position, convertView, parent) as TextView
-                // Fijar estilo y fuente de los items
-                view.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD)
-
-                //return super.getDropDownView(position, convertView, parent)
-                return view
-            }
-        }
-
-        // Vincular los datos al spinner
-        binding.spinner2.adapter = adapter
-
-
         checkUserPays()
-
-        //BORRAR
-        //savePaymentFirebase()
 
     }
 
     /**
-     * Clase para comprobar los pagos del usuario
-     *  - Si no está pagado el mes actual se ofrecen las opciones de pagar el mes actual o el proximo.
-     *  - Si el mes actual está pagado solo se ofrece la opción de pagar el proximo mes.
-     *  - Si el mes proximo está pagado se informa al usuario que está al corriente de pagos.
+     * Clase para comprobar los pagos del usuario, si no está pagado el mes actual se permite
+     * realizar el pago
      */
     private fun checkUserPays() {
-        //BORRAR
-        binding.button.isEnabled = true
-        binding.button.setOnClickListener { savePaymentFirebase(cuotaPagar) }
-
         // Mes actual
-        //val mesActual: Date = Date()
-        val mesActual: Calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
-        mesActual.time = currentDate
-        // Fecha de la cuota que se va a pagar
-        cuotaPagar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
-        cuotaPagar.time = currentDate
-        // Todos los pagos se registran como el 1 del mes pagado
-        cuotaPagar.set(Calendar.DAY_OF_MONTH, 1)
-        // Cambiar mes pagado para hacer pruebas
-        cuotaPagar.set(Calendar.MONTH, 0) // Enero de 2022
+        cuotaActual = Calendar.getInstance(TimeZone.getTimeZone("GMT+0:00"))
+        cuotaActual.time = currentDate
+        // Todos los pagos se registran como el día 1 del mes pagado
+        cuotaActual.set(Calendar.DAY_OF_MONTH, 1)
+        cuotaActual.set(Calendar.HOUR_OF_DAY, 1)
+        cuotaActual.set(Calendar.MINUTE, 0)
+        cuotaActual.set(Calendar.SECOND, 0)
+        // Cambiar mes pagado para hacer pruebas (0->enero, 1->febrero ...)
+        //cuotaActual.set(Calendar.DAY_OF_MONTH, 1) // Cambiar mes para hacer pruebas
+        // Nombre del mes
+        val mes = Utilities.getMonthName(cuotaActual)
+        // Obtener identificador del mes
+        val identificador =
+            this.resources.getIdentifier(mes.lowercase(), "string", this.packageName)
 
         firestore.collection("users").document(user_email).collection("payments")
             .orderBy("cuotaPagada", Query.Direction.DESCENDING)
@@ -154,17 +126,22 @@ class StripeActivity : AppCompatActivity() {
             .addOnSuccessListener { pagos ->
                 val listaPagos = pagos.toObjects(Pago::class.java)
                 if (listaPagos.isEmpty()) {
-                    Log.d("Sport", "Lista de pagos vacia")
+                    binding.txtPago.text = "${getString(identificador)} - ${cuotaActual.get(Calendar.YEAR)}"
+                    binding.txtPrice.text = "${precioCuota.toString()} ${getString(R.string.currency_symbol)}"
+                    //binding.btnPay.isEnabled = true
+                    habilitarPago = true
                 } else {
-                    Log.d("Sport", "Lista de pagos NO vacia: ${listaPagos.size}")
-                    // Seleccionar el último pago
-                    val ultimaCuota: Calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
-                    ultimaCuota.time = listaPagos[0].cuotaPagada
-                    if (ultimaCuota < mesActual){
-                        Log.d("Sport", "Se puede pagar: $cuotaPagar")
-                        Log.d("Sport", "Ultima cuota: ${ultimaCuota.time}")
-                        Log.d("Sport", "Cuota actual: ${mesActual.time}")
-                        //binding.button.isEnabled = true
+                    // Seleccionar el último pago realizado
+                    val ultimaCuota: Calendar = Calendar.getInstance()
+                    ultimaCuota.time = listaPagos[0].cuotaPagada!!
+                    // Caso en el que la última cuota pagada es anterior a la actual
+                    if (ultimaCuota.time < cuotaActual.time) {
+                        //binding.btnPay.isEnabled = true
+                        habilitarPago = true
+                        // Caso en el que la última cuota es la actual
+                    } else {
+                        // Informar al usuario que está al corriente de pagos
+                        binding.txtPago.text = "La cuota actual (${getString(identificador)} - ${cuotaActual.get(Calendar.YEAR)}) ya está pagada"
                     }
                 }
             }
@@ -249,6 +226,11 @@ class StripeActivity : AppCompatActivity() {
                         ClientSecret = responseJson.getString("client_secret")
 
                         //Toast.makeText(this, ClientSecret, Toast.LENGTH_SHORT).show()
+                        //paymentFlow()
+                        // Desbloquear boton de pago tras la obtención de los credenciales
+                        if (habilitarPago){
+                            binding.btnPay.isEnabled = true
+                        }
 
                     } catch (e: JSONException) {
                         e.printStackTrace()
@@ -268,7 +250,9 @@ class StripeActivity : AppCompatActivity() {
                 params["customer"] = customerID
                 // En el parametro amount (cantidad del pago) los dos últimos ceros son para decimales:
                 // 1225 = 12.25 EUR
-                params["amount"] = "1225"
+                //params["amount"] = "1225"
+                // Añadir dos 0 al final del precio que son los decimales
+                params["amount"] = precioCuota.toString() + "00"
                 params["currency"] = "eur"
                 params["automatic_payment_methods[enabled]"] = "true"
                 return params
@@ -293,40 +277,51 @@ class StripeActivity : AppCompatActivity() {
         when (paymentSheetResult) {
             is PaymentSheetResult.Canceled -> {
                 //print("Canceled")
-                Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show()
             }
             is PaymentSheetResult.Failed -> {
                 //print("Error: ${paymentSheetResult.error}")
-                Toast.makeText(this, "Error: ${paymentSheetResult.error}", Toast.LENGTH_SHORT)
+                //Toast.makeText(this, "Error: ${paymentSheetResult.error}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.payment_incomplete), Toast.LENGTH_SHORT)
                     .show()
             }
             is PaymentSheetResult.Completed -> {
                 // Display for example, an order confirmation screen
                 //print("Completed")
-                Toast.makeText(this, "Pago completado", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Pago completado", Toast.LENGTH_SHORT).show()
 
-                //savePaymentFirebase()
+                savePaymentFirebase(cuotaActual)
             }
         }
     }
 
     private fun savePaymentFirebase(cuotaPagar: Calendar) {
         // La numeración de los meses empieza en 0 (Enero = 0)
-        Log.d("Sport", calendar.get(Calendar.MONTH).toString())
-        Log.d("Sport", calendar.get(Calendar.YEAR).toString())
-        Log.d("Sport", "Cuota: ${cuotaPagar.time}")
         val pago = Pago(
-            // Convertir calendar a date para guardar en Firebase
-            cuotaPagada = cuotaPagar.time
+            // Convertir calendar a date para guardar en Firestore
+            cuotaPagada = cuotaPagar.time,
+            cantidad = precioCuota.toString()
         )
         firestore.collection("users").document(user_email).collection("payments")
             .document()
             .set(pago)
             .addOnSuccessListener {
-                Log.d("Sport", "Pago guardado en Firestore")
+                val intent = Intent(this, ConfirmPayActivity::class.java)
+                intent.putExtra("estado", "correcto")
+                startActivity(intent)
+                finish()
             }
             .addOnFailureListener {
-                Log.d("Sport", "Error: pago Firestore $it")
+                val intent = Intent(this, ConfirmPayActivity::class.java)
+                intent.putExtra("estado", "incorrecto")
+                startActivity(intent)
+                finish()
             }
+    }
+
+    // Funcion para volver atras, al menú principal
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }
