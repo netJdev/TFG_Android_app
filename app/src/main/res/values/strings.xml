@@ -83,4 +83,7 @@
     <string name="class_reservation_incompleted">An error has occurred please try again later</string>
     <string name="payment_completed">Payment completed</string>
     <string name="payment_incomplete">An error has occurred please try again later</string>
+    <string name="pay_status">Ststus: Paid</string>
+    <string name="my_payments">My payments</string>
+    <string name="class_already_booked">This class is already booked</string>
 </resources>

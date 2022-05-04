@@ -16,6 +16,7 @@ import com.google.firebase.storage.ktx.component2
 import com.netjdev.tfg_android_app.adapters.DocCategoryAdapter
 import com.netjdev.tfg_android_app.modelos.DocCategory
 import kotlinx.android.synthetic.main.activity_list_of_doc_category.*
+import kotlinx.android.synthetic.main.header.*
 
 
 class ListOfDocCategoryActivity : AppCompatActivity() {
@@ -38,6 +39,7 @@ class ListOfDocCategoryActivity : AppCompatActivity() {
         // Texto de la cabecera
         val text_header: TextView = findViewById(R.id.txtHeader)
         text_header.text = getString(R.string.btn_docs)
+        btnHeader.setOnClickListener { onBackPressed() }
 
         binding.listDocTypeRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.listDocTypeRecyclerView.adapter = DocCategoryAdapter { docCategory ->

@@ -1,16 +1,16 @@
 package com.netjdev.tfg_android_app.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.common.io.Resources
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.modelos.Pago
 import com.netjdev.tfg_android_app.util.Utilities
-import com.netjdev.tfg_android_app.vistas.ListOfPaymentsActivity
 import kotlinx.android.synthetic.main.item_group_class.view.*
 import kotlinx.android.synthetic.main.item_payment.view.*
-import kotlinx.coroutines.NonDisposableHandle.parent
 import java.util.*
 
 class PaymentAdapter(val paymentClick: (Pago) -> Unit) :
@@ -35,21 +35,25 @@ class PaymentAdapter(val paymentClick: (Pago) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: PaymentViewHolder, position: Int) {
-        val cuota = Calendar.getInstance()
-        cuota.time = payments[position].cuotaPagada!!
-        val mes = Utilities.getMonthName(cuota)
+        val context = holder.itemView.context
+        val pago = Calendar.getInstance()
+        pago.time = payments[position].cuotaPagada!!
+        val mes = Utilities.getMonthName(pago)
         // Obtener identificador del mes
-        val identificador =
+        val identificador = context.resources.getIdentifier(mes.lowercase(), "string", context.packageName)
 
+        //int resourceID = getResources().getIdentifier("ball_red", "drawable", getPackageName());
+        //int resId=context.getResources().getIdentifier("ball_red", "drawable", context.getPackageName());
+        //val identificador =
+        //            this.resources.getIdentifier(mes.lowercase(), "string", this.packageName)
 
-            //parent.resources.getIdentifier(mes.lowercase(), "string", this.packageName)
-
-        val cuota = payments[position].cuotaPagada.
-        holder.itemView.txtPayName.text = payments[position].cuotaPagada.toString()
+        val cuota = "${context.getString(identificador)} - ${pago.get(Calendar.YEAR)}"
+        holder.itemView.txtPayName.text = cuota
+        holder.itemView.txtPayStatus.text = context.getString(R.string.pay_status)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return payments.count()
     }
 
     class PaymentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

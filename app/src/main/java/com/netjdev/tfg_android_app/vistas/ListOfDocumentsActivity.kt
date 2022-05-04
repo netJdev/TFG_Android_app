@@ -16,6 +16,7 @@ import com.netjdev.tfg_android_app.databinding.ActivityListOfDocumentsBinding
 import com.netjdev.tfg_android_app.modelos.Document
 import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_list_of_documents.*
+import kotlinx.android.synthetic.main.header.*
 
 class ListOfDocumentsActivity : AppCompatActivity() {
 
@@ -41,6 +42,7 @@ class ListOfDocumentsActivity : AppCompatActivity() {
         // Texto de la cabecera
         val text_header: TextView = findViewById(R.id.txtHeader)
         text_header.text = categoryName
+        btnHeader.setOnClickListener { onBackPressed() }
 
         binding.listDocumentsRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.listDocumentsRecyclerView.adapter = DocumentAdapter { document ->

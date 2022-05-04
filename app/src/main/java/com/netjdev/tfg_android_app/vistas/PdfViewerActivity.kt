@@ -14,6 +14,7 @@ import com.google.firebase.storage.ktx.storage
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityPdfViewerBinding
 import kotlinx.android.synthetic.main.activity_pdf_viewer.*
+import kotlinx.android.synthetic.main.header.*
 
 class PdfViewerActivity : AppCompatActivity(), OnTapListener, OnPageChangeListener {
 
@@ -49,8 +50,7 @@ class PdfViewerActivity : AppCompatActivity(), OnTapListener, OnPageChangeListen
         // Texto de la cabecera
         val text_header: TextView = findViewById(R.id.txtHeader)
         text_header.text = documentName
-
-
+        btnHeader.setOnClickListener { onBackPressed() }
 
         val storageRef = storage.reference.child("documentos").child(categoryName).child(documentName)
 

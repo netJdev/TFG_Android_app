@@ -20,6 +20,7 @@ import com.netjdev.tfg_android_app.util.Utilities
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
+import kotlinx.android.synthetic.main.header.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
@@ -72,14 +73,13 @@ class StripeActivity : AppCompatActivity() {
         intent.getStringExtra("user_email")?.let { user_email = it }
 
         initComponents()
-
-
     }
 
     private fun initComponents() {
         // Texto de la cabecera
         val text_header: TextView = findViewById(R.id.txtHeader)
         text_header.text = getString(R.string.payments)
+        btnHeader.setOnClickListener { onBackPressed() }
 
         binding.btnCancelPay.setOnClickListener { onBackPressed() }
 
@@ -105,15 +105,17 @@ class StripeActivity : AppCompatActivity() {
      */
     private fun checkUserPays() {
         // Mes actual
-        cuotaActual = Calendar.getInstance(TimeZone.getTimeZone("GMT+0:00"))
+        //cuotaActual = Calendar.getInstance(TimeZone.getTimeZone("GMT+0:00"))
+        cuotaActual = Calendar.getInstance()
         cuotaActual.time = currentDate
         // Todos los pagos se registran como el día 1 del mes pagado
         cuotaActual.set(Calendar.DAY_OF_MONTH, 1)
         cuotaActual.set(Calendar.HOUR_OF_DAY, 1)
         cuotaActual.set(Calendar.MINUTE, 0)
         cuotaActual.set(Calendar.SECOND, 0)
+        cuotaActual.set(Calendar.MILLISECOND, 0)
         // Cambiar mes pagado para hacer pruebas (0->enero, 1->febrero ...)
-        //cuotaActual.set(Calendar.DAY_OF_MONTH, 1) // Cambiar mes para hacer pruebas
+        //cuotaActual.set(Calendar.DAY_OF_MONTH, 0) // Cambiar mes para hacer pruebas
         // Nombre del mes
         val mes = Utilities.getMonthName(cuotaActual)
         // Obtener identificador del mes
@@ -134,12 +136,14 @@ class StripeActivity : AppCompatActivity() {
                     // Seleccionar el último pago realizado
                     val ultimaCuota: Calendar = Calendar.getInstance()
                     ultimaCuota.time = listaPagos[0].cuotaPagada!!
+                    val compareDate = ultimaCuota.time.compareTo(cuotaActual.time)
                     // Caso en el que la última cuota pagada es anterior a la actual
-                    if (ultimaCuota.time < cuotaActual.time) {
-                        //binding.btnPay.isEnabled = true
+                    if (compareDate == -1) {
+                        binding.txtPago.text = "${getString(identificador)} - ${cuotaActual.get(Calendar.YEAR)}"
+                        binding.txtPrice.text = "${precioCuota.toString()} ${getString(R.string.currency_symbol)}"
                         habilitarPago = true
                         // Caso en el que la última cuota es la actual
-                    } else {
+                    } else if (compareDate == 0) {
                         // Informar al usuario que está al corriente de pagos
                         binding.txtPago.text = "La cuota actual (${getString(identificador)} - ${cuotaActual.get(Calendar.YEAR)}) ya está pagada"
                     }

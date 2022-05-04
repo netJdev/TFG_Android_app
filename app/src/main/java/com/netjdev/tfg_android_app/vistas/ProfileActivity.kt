@@ -12,6 +12,7 @@ import com.google.firebase.ktx.Firebase
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityProfileBinding
 import com.netjdev.tfg_android_app.modelos.User
+import kotlinx.android.synthetic.main.header.*
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -43,6 +44,7 @@ class ProfileActivity : AppCompatActivity() {
         // Texto de la cabecera
         val text_header: TextView = findViewById(R.id.txtHeader)
         text_header.text = getString(R.string.profile)
+        btnHeader.setOnClickListener { onBackPressed() }
 
         binding.btnEditar.setOnClickListener { enableEditData() }
         binding.btnCancelar.setOnClickListener { onBackPressed() }

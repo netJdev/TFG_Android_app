@@ -76,4 +76,7 @@
     <string name="class_reservation_incompleted">Se ha producido un error intentelo más tarde</string>
     <string name="payment_completed">Pago completado</string>
     <string name="payment_incomplete">Se ha producido un error intentelo más tarde</string>
+    <string name="pay_status">Estado: Pagado</string>
+    <string name="my_payments">Mis pagos</string>
+    <string name="class_already_booked">Esta clase ya está reservada</string>
 </resources>

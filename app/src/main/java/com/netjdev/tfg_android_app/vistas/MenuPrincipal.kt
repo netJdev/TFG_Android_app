@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -18,11 +19,19 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.netjdev.tfg_android_app.BuildConfig
 import com.netjdev.tfg_android_app.R
+import com.netjdev.tfg_android_app.adapters.ChatAdapter
+import com.netjdev.tfg_android_app.adapters.MessageAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityMenuPrincipalBinding
+import com.netjdev.tfg_android_app.modelos.Chat
+import com.netjdev.tfg_android_app.modelos.Message
+import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.activity_list_of_chats.*
 import kotlinx.android.synthetic.main.activity_menu_principal.*
 import kotlinx.android.synthetic.main.menu_principal_include.*
 
@@ -36,6 +45,8 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     // Variable con el email de usuario que se recibe del intent
     private var user_email = ""
+
+    private var firestore = Firebase.firestore
 
     // Menu lateral
     private lateinit var drawer: DrawerLayout
@@ -88,6 +99,12 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             initComponents()
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Listener del chat
+        //checkNewMessages()
     }
 
     private fun notifications() {
@@ -148,6 +165,9 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
         btnNotifications = findViewById(R.id.btnNotifications)
         btnNotifications.setOnClickListener { notificationsBTN() }
+
+        // Listener del chat
+        //checkNewMessages()
     }
 
     private fun chat() {
@@ -201,17 +221,27 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         finish()
     }
 
-    // Carga de Activity
+    // Carga de ProfileActivity
     private fun loadProfileActivity(context: Activity, activityClass: Class<ProfileActivity>) {
         val intent = Intent(context, activityClass)
         intent.putExtra("user_email", user_email)
         startActivity(intent)
     }
 
-    // Carga de Activity
+    // Carga de ListOfReservedClassesActivity
     private fun loadReservedClassesActivity(
         context: Activity,
         activityClass: Class<ListOfReservedClassesActivity>
+    ) {
+        val intent = Intent(context, activityClass)
+        intent.putExtra("user_email", user_email)
+        startActivity(intent)
+    }
+
+    // Carga de ProfileActivity
+    private fun loadListOfPaymentsActivity(
+        context: Activity,
+        activityClass: Class<ListOfPaymentsActivity>
     ) {
         val intent = Intent(context, activityClass)
         intent.putExtra("user_email", user_email)
@@ -226,7 +256,10 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                 this,
                 ListOfReservedClassesActivity::class.java
             )
-            R.id.nav_item_payments -> loadProfileActivity(this, ProfileActivity::class.java)
+            R.id.nav_item_payments -> loadListOfPaymentsActivity(
+                this,
+                ListOfPaymentsActivity::class.java
+            )
             R.id.nav_item_four -> logOut()
         }
         drawer.closeDrawer(GravityCompat.START)
@@ -249,5 +282,41 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    // Listener para saber si han llegado mensajes nuevos
+    private fun checkNewMessages() {
+        // Referencia al usuario
+        val user = firestore.collection("users").document(user_email)
+        // Referencia al chat
+        var chatId = Chat()
+        // Descargar los chats del usuario
+        user.collection("chats")
+            .get()
+            .addOnSuccessListener { chats ->
+                // Casting de los documentos descargados de la coleccion a objetos Chat
+                val listChats = chats.toObjects(Chat::class.java)
+
+                // Pasar al adapter del RecyclerView los datos que se cargaran (lista de chats)
+                //(listChatsRecyclerView.adapter as ChatAdapter).setData(listChats)
+
+                // Si el user no es el admin, se salta este activity y pasa directamente al chat
+                if (user_email != "admin@email.com") {
+                    if (chats.size()!=0){
+                         chatId = listChats[0]
+                    }else{
+                        // Si el chat del usuario con el Admin no existe se crea
+                        //newChatAdmin()
+                    }
+                }
+            }
+        // Actualizacion en tiempo real de la lista de chats
+        user.collection("chats").addSnapshotListener { chats, error ->
+            if (error == null) {
+                Toast.makeText(baseContext, "Mensaje recibido", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(baseContext, R.string.chats_load_failed, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

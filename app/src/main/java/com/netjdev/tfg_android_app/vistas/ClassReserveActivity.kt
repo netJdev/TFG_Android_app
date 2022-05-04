@@ -5,17 +5,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.Query
 import com.netjdev.tfg_android_app.R
+import com.netjdev.tfg_android_app.adapters.ReservedClassAdapter
 import com.netjdev.tfg_android_app.adapters.TimeAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityClassReserveBinding
 import com.netjdev.tfg_android_app.modelos.ClassReserveDay
 import com.netjdev.tfg_android_app.modelos.ClassReserveTime
 import com.netjdev.tfg_android_app.modelos.UserClass
 import kotlinx.android.synthetic.main.activity_class_reserve.*
+import kotlinx.android.synthetic.main.activity_list_of_reserved_classes.*
+import kotlinx.android.synthetic.main.header.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -42,6 +47,7 @@ class ClassReserveActivity : AppCompatActivity() {
     // Fecha actual
     private val currentDate: Date = Date()
     private lateinit var calendar: Calendar
+    private lateinit var selectedDay: Calendar
 
     // Día de la semana seleccionado
     private var weekdaySelected = ""
@@ -61,9 +67,11 @@ class ClassReserveActivity : AppCompatActivity() {
         // Texto de la cabecera
         val text_header: TextView = findViewById(R.id.txtHeader)
         text_header.text = className
+        btnHeader.setOnClickListener { onBackPressed() }
 
         // Inicializar calendar
-        calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
+        //calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
+        calendar = Calendar.getInstance()
         calendar.time = currentDate
 
         printDate(calendar.get(Calendar.DAY_OF_WEEK))
@@ -186,14 +194,78 @@ class ClassReserveActivity : AppCompatActivity() {
             }
     }
 
+    private fun timeSelected(time: ClassReserveTime) {
+        // Fijar parametros del campo date
+        selectedDay.set(Calendar.HOUR_OF_DAY, time.id.toInt())
+        selectedDay.set(Calendar.MINUTE, 0)
+        selectedDay.set(Calendar.SECOND, 0)
+        selectedDay.set(Calendar.MILLISECOND, 0)
+
+        // Variable que indica si la clase seleccionada ya está reservada
+        var claseYaReservada = false
+
+        // Compruebr si la clase que quiere reservar el usuario ya la ha reservado previamente
+        firestore
+            .collection("users")
+            .document(user_email)
+            .collection("classes")
+            //.orderBy("day", Query.Direction.ASCENDING)
+            .get()
+            .addOnSuccessListener { userClasses ->
+                val listUserClasses = userClasses.toObjects(UserClass::class.java)
+                listUserClasses.forEach { clase ->
+                    if (clase.className == className) {
+                        if (clase.date?.equals(selectedDay.time) == true) {
+                            claseYaReservada = true
+                        }
+                    }
+                }
+                // Si la clase no ha sido reservada se procede a la reserva
+                if (!claseYaReservada) {
+
+                    // Restar uno al número de plazas disponibles de la clase
+                    val numPlazas = time.plazas.toInt() - 1
+
+                    // Disminuir en 1 el número de plazas disponibles
+                    firestore.collection("activities").document(className).collection("days")
+                        .document(weekdaySelected).collection("time").document(time.name)
+                        .update("plazas", numPlazas.toString())
+
+                    // Objeto que guarda las clases reservadas de un usuario
+                    val userClass = UserClass(
+                        className = className,
+                        day = weekdaySelected,
+                        time = time.name,
+                        date = selectedDay.time
+                    )
+
+                    // Guardar la clase en el perfil del usuario
+                    firestore.collection("users").document(user_email).collection("classes")
+                        .document()
+                        .set(userClass)
+                        .addOnSuccessListener {
+                            val intent = Intent(this, ConfirmReservationActivity::class.java)
+                            intent.putExtra("estado", "correcto")
+                            startActivity(intent)
+                            finish()
+                        }
+                        .addOnFailureListener {
+                            val intent = Intent(this, ConfirmReservationActivity::class.java)
+                            intent.putExtra("estado", "incorrecto")
+                            startActivity(intent)
+                            finish()
+                        }
+                }else{
+                    // Si la clase ya ha sido reservada, se le comunica al usuario con un mensaje
+                    Toast.makeText(this, getString(R.string.class_already_booked), Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener {
+                Log.d("Sport", "FAILURE: ${it}")
+            }
+    }
+
     private fun printDate(diaSeleccionado: Int) {
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val formato: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-
-        }else{
-            //VERSION.SDK_INT < O
-        }*/
-
         // Añadir día con letra
         var diaLetra = ""
         when (diaSeleccionado) {
@@ -220,49 +292,14 @@ class ClassReserveActivity : AppCompatActivity() {
             }
         }
 
-        val txtCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
-        txtCalendar.time = currentDate
-        txtCalendar.add(Calendar.DATE, diaSeleccionado - calendar.get(Calendar.DAY_OF_WEEK))
+        //val txtCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
+        selectedDay = Calendar.getInstance()
+        selectedDay.time = currentDate
+        selectedDay.add(Calendar.DATE, diaSeleccionado - calendar.get(Calendar.DAY_OF_WEEK))
 
         val formatter: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
-        val dia = formatter.format(txtCalendar.time)
+        val dia = formatter.format(selectedDay.time)
         //Log.d("Sport", "Fecha formateada: ${dia}")
         txtCurrenDay.text = "$diaLetra - $dia"
-    }
-
-    private fun timeSelected(time: ClassReserveTime) {
-        // Hacer reserva de clase
-        //Toast.makeText(this, "Reserva de clase", Toast.LENGTH_SHORT).show()
-
-        // Restar uno al número de plazas disponibles de la clase
-        Log.d("Sport", "Time selected: ${time}")
-        val numPlazas = time.plazas.toInt() - 1
-        firestore.collection("activities").document(className).collection("days")
-            .document(weekdaySelected).collection("time").document(time.name)
-            .update("plazas", numPlazas.toString())
-
-        // Objeto que guarda las clases reservadas de un usuario
-        val userClass = UserClass(
-            className = className,
-            day = weekdaySelected,
-            time = time.name
-        )
-        //Log.d("Sport", "User ID: ${user_email}")
-        // Guardar la clase en el perfil del usuario
-        firestore.collection("users").document(user_email).collection("classes")
-            .document()
-            .set(userClass)
-            .addOnSuccessListener {
-                val intent = Intent(this, ConfirmReservationActivity::class.java)
-                intent.putExtra("estado", "correcto")
-                startActivity(intent)
-                finish()
-            }
-            .addOnFailureListener {
-                val intent = Intent(this, ConfirmReservationActivity::class.java)
-                intent.putExtra("estado", "incorrecto")
-                startActivity(intent)
-                finish()
-            }
     }
 }

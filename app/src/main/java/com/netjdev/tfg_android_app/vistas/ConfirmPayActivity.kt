@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityConfirmPayBinding
+import kotlinx.android.synthetic.main.header.*
 
 class ConfirmPayActivity : AppCompatActivity() {
 
@@ -29,6 +30,7 @@ class ConfirmPayActivity : AppCompatActivity() {
         // Texto de la cabecera
         val text_header: TextView = findViewById(R.id.txtHeader)
         text_header.text = getString(R.string.confirm_reservation)
+        btnHeader.setOnClickListener { onBackPressed() }
 
         // Ocultar imagenes
         binding.imgPayCorrecto.visibility = View.INVISIBLE

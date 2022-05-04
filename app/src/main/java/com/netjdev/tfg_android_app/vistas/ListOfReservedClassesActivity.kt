@@ -14,6 +14,8 @@ import com.netjdev.tfg_android_app.adapters.ReservedClassAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityListOfReservedClassesBinding
 import com.netjdev.tfg_android_app.modelos.UserClass
 import kotlinx.android.synthetic.main.activity_list_of_reserved_classes.*
+import kotlinx.android.synthetic.main.header.*
+import java.util.*
 
 class ListOfReservedClassesActivity : AppCompatActivity() {
 
@@ -25,6 +27,10 @@ class ListOfReservedClassesActivity : AppCompatActivity() {
 
     // Id de usuario (email)
     private var user_email = ""
+
+    // Fecha actual
+    private val currentDate: Date = Date()
+    private lateinit var fechaActual: Calendar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,24 +46,43 @@ class ListOfReservedClassesActivity : AppCompatActivity() {
         // Texto de la cabecera
         val text_header: TextView = findViewById(R.id.txtHeader)
         text_header.text = getString(R.string.my_classes)
+        btnHeader.setOnClickListener { onBackPressed() }
 
         binding.listReservedClasesRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.listReservedClasesRecyclerView.adapter = ReservedClassAdapter { userClass ->
             deleteReservedClassSelected(userClass)
         }
 
+        fechaActual = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
+        fechaActual.time = currentDate
+        // Se suman 3 horas, 2 por la zona horaria (GMT+2:00)
+        fechaActual.add(Calendar.HOUR, 2)
+        fechaActual.set(Calendar.MINUTE, 0)
+        fechaActual.set(Calendar.SECOND, 0)
+        fechaActual.set(Calendar.MILLISECOND, 0)
+
         firestore.collection("users").document(user_email).collection("classes")
-            .orderBy("day", Query.Direction.ASCENDING)
+            .orderBy("day", Query.Direction.DESCENDING)
             // Para añadir un segundo orderBy hay que añadir indices en Firestore
             //.orderBy("time", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { userClasses ->
                 val listUserClasses = userClasses.toObjects(UserClass::class.java)
-                //Log.d("Sport", "ReservedClass: ${listUserClasses}")
-                //Log.d("Sport", "ReservedClass: ${userClasses.documents[0].id}")
-
+                val listaClasesPendientes: MutableList<UserClass> = mutableListOf()
+                listUserClasses.forEach {
+                    //Log.d("Sport", "Fecha Actual: ${fechaActual.time}")
+                    //Log.d("Sport", "Fecha Clase: ${it.date}")
+                    val compararFecha = it.date?.compareTo(fechaActual.time)
+                    //Log.d("Sport", "Comparar: ${compararFecha}")
+                    if (compararFecha != null) {
+                        if (compararFecha >= 0) {
+                            listaClasesPendientes.add(it)
+                        }
+                    }
+                }
                 (listReservedClasesRecyclerView.adapter as ReservedClassAdapter).setData(
-                    listUserClasses
+                    //listUserClasses
+                    listaClasesPendientes
                 )
 
             }
