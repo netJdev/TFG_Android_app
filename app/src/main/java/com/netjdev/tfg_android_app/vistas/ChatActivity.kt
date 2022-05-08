@@ -12,6 +12,7 @@ import com.google.firebase.ktx.Firebase
 import com.netjdev.tfg_android_app.adapters.MessageAdapter
 import com.netjdev.tfg_android_app.modelos.Message
 import com.netjdev.tfg_android_app.databinding.ActivityChatBinding
+import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_chat.*
 
 class ChatActivity : AppCompatActivity() {
@@ -76,6 +77,10 @@ class ChatActivity : AppCompatActivity() {
                     }
                 }
             }
+        // BORRAR - Modo revisión
+        if (Utilities.getTestMode()){
+            Thread.sleep(2000)
+        }
     }
 
     private fun sendMessage() {

@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.github.barteksc.pdfviewer.PDFView
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
+import com.github.barteksc.pdfviewer.listener.OnRenderListener
 import com.github.barteksc.pdfviewer.listener.OnTapListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -16,7 +18,7 @@ import com.netjdev.tfg_android_app.databinding.ActivityPdfViewerBinding
 import kotlinx.android.synthetic.main.activity_pdf_viewer.*
 import kotlinx.android.synthetic.main.header.*
 
-class PdfViewerActivity : AppCompatActivity(), OnTapListener, OnPageChangeListener {
+class PdfViewerActivity : AppCompatActivity(), OnTapListener, OnPageChangeListener, OnRenderListener {
 
     // Variable para la vinculacion de vistas
     private lateinit var binding: ActivityPdfViewerBinding
@@ -61,6 +63,7 @@ class PdfViewerActivity : AppCompatActivity(), OnTapListener, OnPageChangeListen
                     .onTap(this)
                     .onPageChange(this)
                     .autoSpacing(true)
+                    .onRender(this)
                     .load()
             }
             .addOnFailureListener { e ->
@@ -69,7 +72,7 @@ class PdfViewerActivity : AppCompatActivity(), OnTapListener, OnPageChangeListen
     }
 
     override fun onTap(e: MotionEvent?): Boolean {
-        Toast.makeText(this, "Tap", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "Tap", Toast.LENGTH_SHORT).show()
         return true
     }
 
@@ -77,5 +80,10 @@ class PdfViewerActivity : AppCompatActivity(), OnTapListener, OnPageChangeListen
         //Log.d("Sport", "Page: ${page}")
         //Log.d("Sport", "PageCount: ${pageCount}")
         txtNumPages.text = "${page+1}/${pageCount}"
+    }
+
+    override fun onInitiallyRendered(nbPages: Int) {
+        // Ocultar barra de progreso cuando termina la carga del documento
+        binding.includeProgressbar.progressbar.visibility = View.GONE
     }
 }

@@ -12,8 +12,14 @@ class Utilities {
             return textClean
         }
 
+        // Devuelve el nombre del mes
         fun getMonthName(calendar: Calendar): String {
             return calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH)!!
+        }
+
+        // Devuelve true o false para controlar si la aplicación se comportará en modo revisión
+        fun getTestMode(): Boolean {
+            return true
         }
     }
 

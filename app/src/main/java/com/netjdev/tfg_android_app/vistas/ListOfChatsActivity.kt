@@ -12,6 +12,7 @@ import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.adapters.ChatAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityListOfChatsBinding
 import com.netjdev.tfg_android_app.modelos.Chat
+import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_list_of_chats.*
 import java.util.*
 
@@ -77,6 +78,10 @@ class ListOfChatsActivity : AppCompatActivity() {
                     }
                 }
             }
+        // BORRAR - Modo revisión
+        if (Utilities.getTestMode()){
+            Thread.sleep(1000)
+        }
 
         // Actualizacion en tiempo real de la lista de chats
         user.collection("chats").addSnapshotListener { chats, error ->

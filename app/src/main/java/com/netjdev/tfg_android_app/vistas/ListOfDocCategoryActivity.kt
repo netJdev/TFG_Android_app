@@ -15,6 +15,7 @@ import com.google.firebase.storage.ktx.component1
 import com.google.firebase.storage.ktx.component2
 import com.netjdev.tfg_android_app.adapters.DocCategoryAdapter
 import com.netjdev.tfg_android_app.modelos.DocCategory
+import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_list_of_doc_category.*
 import kotlinx.android.synthetic.main.header.*
 
@@ -79,6 +80,10 @@ class ListOfDocCategoryActivity : AppCompatActivity() {
             .addOnFailureListener {
                 // Fallo
             }
+        // BORRAR - Modo revisión
+        if (Utilities.getTestMode()){
+            Thread.sleep(1000)
+        }
 
     }
 

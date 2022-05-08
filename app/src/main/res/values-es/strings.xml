@@ -79,4 +79,6 @@
     <string name="pay_status">Estado: Pagado</string>
     <string name="my_payments">Mis pagos</string>
     <string name="class_already_booked">Esta clase ya está reservada</string>
+    <string name="fee_already_paid">La cuota actual (%d - %d) ya está pagada</string>
+    <string name="pay_fee">Pagar cuota</string>
 </resources>

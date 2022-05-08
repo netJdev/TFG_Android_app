@@ -86,4 +86,6 @@
     <string name="pay_status">Ststus: Paid</string>
     <string name="my_payments">My payments</string>
     <string name="class_already_booked">This class is already booked</string>
+    <string name="fee_already_paid">The current fee (%s - %d) is already paid</string>
+    <string name="pay_fee">Pay fee</string>
 </resources>

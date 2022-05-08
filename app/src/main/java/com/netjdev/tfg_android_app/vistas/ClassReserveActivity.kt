@@ -18,6 +18,7 @@ import com.netjdev.tfg_android_app.databinding.ActivityClassReserveBinding
 import com.netjdev.tfg_android_app.modelos.ClassReserveDay
 import com.netjdev.tfg_android_app.modelos.ClassReserveTime
 import com.netjdev.tfg_android_app.modelos.UserClass
+import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_class_reserve.*
 import kotlinx.android.synthetic.main.activity_list_of_reserved_classes.*
 import kotlinx.android.synthetic.main.header.*
@@ -204,7 +205,7 @@ class ClassReserveActivity : AppCompatActivity() {
         // Variable que indica si la clase seleccionada ya está reservada
         var claseYaReservada = false
 
-        // Compruebr si la clase que quiere reservar el usuario ya la ha reservado previamente
+        // Comprobar si la clase que quiere reservar el usuario ya la ha reservado previamente
         firestore
             .collection("users")
             .document(user_email)
@@ -263,6 +264,10 @@ class ClassReserveActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Log.d("Sport", "FAILURE: ${it}")
             }
+        // BORRAR - Modo revisión
+        /*if (Utilities.getTestMode()){
+            Thread.sleep(2000)
+        }*/
     }
 
     private fun printDate(diaSeleccionado: Int) {

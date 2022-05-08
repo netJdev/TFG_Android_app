@@ -12,8 +12,10 @@ import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.adapters.GroupClassAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityListOfGroupClassesBinding
 import com.netjdev.tfg_android_app.modelos.GroupClass
+import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_list_of_group_classes.*
 import kotlinx.android.synthetic.main.header.*
+import kotlin.concurrent.thread
 
 class ListOfGroupClassesActivity : AppCompatActivity() {
 
@@ -56,6 +58,10 @@ class ListOfGroupClassesActivity : AppCompatActivity() {
                 // Pasar al adapter del RecyclerView los datos que se cargaran (lista de classes)
                 (listGroupClassesRecyclerView.adapter as GroupClassAdapter).setData(listGroupClasses)
             }
+        // BORRAR - Modo revisión
+        if (Utilities.getTestMode()){
+            Thread.sleep(1000)
+        }
     }
 
     private fun groupClassSelected(groupClass: GroupClass) {
