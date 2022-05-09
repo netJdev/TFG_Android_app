@@ -12,17 +12,17 @@ import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.adapters.GroupClassAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityListOfGroupClassesBinding
 import com.netjdev.tfg_android_app.modelos.GroupClass
+import com.netjdev.tfg_android_app.util.EspressoIdlingResource
 import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_list_of_group_classes.*
 import kotlinx.android.synthetic.main.header.*
-import kotlin.concurrent.thread
 
 class ListOfGroupClassesActivity : AppCompatActivity() {
 
     // Variable para la vinculacion de vistas
     private lateinit var binding: ActivityListOfGroupClassesBinding
 
-    // Instancia de Firebase Storage
+    // Instancia de Firebase Firestore
     private var firestore = Firebase.firestore
 
     // Id de usuario (email)
@@ -48,20 +48,26 @@ class ListOfGroupClassesActivity : AppCompatActivity() {
         listGroupClassesRecyclerView.adapter = GroupClassAdapter { groupClass ->
             groupClassSelected(groupClass)
         }
-
+        // Llamada al metodo EspressoIdlingResource (test)
+        EspressoIdlingResource.increment()
         // Referencia de almacenamiento desde la aplicacion
         firestore.collection("activities")
             .get()
             .addOnSuccessListener { activities ->
                 val listGroupClasses = activities.toObjects(GroupClass::class.java)
-                Log.d("Sport", listGroupClasses.toString())
+                //Log.d("Sport", listGroupClasses.toString())
+
                 // Pasar al adapter del RecyclerView los datos que se cargaran (lista de classes)
                 (listGroupClassesRecyclerView.adapter as GroupClassAdapter).setData(listGroupClasses)
+
+                // Llamada al metodo EspressoIdlingResource (test)
+                EspressoIdlingResource.decrement()
             }
+
         // BORRAR - Modo revisión
-        if (Utilities.getTestMode()){
+        /*if (Utilities.getTestMode()){
             Thread.sleep(1000)
-        }
+        }*/
     }
 
     private fun groupClassSelected(groupClass: GroupClass) {

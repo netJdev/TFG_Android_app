@@ -1,60 +1,79 @@
 package com.netjdev.tfg_android_app
 
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.core.app.ActivityScenario
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
+import com.netjdev.tfg_android_app.util.EspressoIdlingResource
 import com.netjdev.tfg_android_app.vistas.MainActivity
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4ClassRunner::class)
+// Esta anotación (@LargeTest) indica que se realizaran accesos a recursos externos, como redes
+@LargeTest
+@RunWith(AndroidJUnit4::class)
 class ConsultarDocumentoTest {
-    @Test
-    fun consultarDocumentoTest() {
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
 
-        Espresso.onView(ViewMatchers.withId(R.id.drawer_layout))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    @get:Rule
+    val activityTestRule = ActivityScenarioRule(MainActivity::class.java)
+
+    @Before
+    fun setUp(){
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
+    }
+
+    @After
+    fun tearDown(){
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
+    }
+
+    @Test
+    fun consultarDocumentoTest(){
+        onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()))
         // Comprobar que el botón existe y pulsarlo
-        Espresso.onView(ViewMatchers.withId(R.id.btnDocs))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.btnDocs)).perform(ViewActions.click())
+        onView(withId(R.id.btnDocs)).check(matches(isDisplayed()))
+        onView(withId(R.id.btnDocs)).perform(click())
         // Comprobar que se ha cargado la activity list_of_doc_category
-        Espresso.onView(ViewMatchers.withId(R.id.activity_list_of_doc_category))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withId(R.id.activity_list_of_doc_category)).check(matches(isDisplayed()))
         // Comprobar que las categorias de documentos son correctas
-        Espresso.onView(ViewMatchers.withId(R.id.listDocTypeRecyclerView)).perform(
+        onView(withId(R.id.listDocTypeRecyclerView)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
                 0
             )
-        ).check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText("Guías de entrenamiento"))))
+        ).check(matches(ViewMatchers.hasDescendant(ViewMatchers.withText("Guías de entrenamiento"))))
 
-        Espresso.onView(ViewMatchers.withId(R.id.listDocTypeRecyclerView)).perform(
+        onView(withId(R.id.listDocTypeRecyclerView)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
                 1
             )
         ).check(
-            ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText("Guías de nutrición")))
+            matches(ViewMatchers.hasDescendant(ViewMatchers.withText("Guías de nutrición")))
         )
         // Aceder a una categoría
-        Espresso.onView(ViewMatchers.withId(R.id.listDocTypeRecyclerView))
+        onView(withId(R.id.listDocTypeRecyclerView))
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                     0,
-                    ViewActions.click()
+                    click()
                 )
             )
         // Acceder a un documento
-        Espresso.onView(ViewMatchers.withId(R.id.listDocumentsRecyclerView))
+        onView(withId(R.id.listDocumentsRecyclerView))
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                     0,
-                    ViewActions.click()
+                    click()
                 )
             )
     }

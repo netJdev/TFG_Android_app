@@ -12,6 +12,7 @@ import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.adapters.ChatAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityListOfChatsBinding
 import com.netjdev.tfg_android_app.modelos.Chat
+import com.netjdev.tfg_android_app.util.EspressoIdlingResource
 import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_list_of_chats.*
 import java.util.*
@@ -55,6 +56,9 @@ class ListOfChatsActivity : AppCompatActivity() {
             chatSelected(chat)
         }
 
+        // Llamada al metodo EspressoIdlingResource (test)
+        EspressoIdlingResource.increment()
+
         // Referencia al usuario
         val user = firestore.collection("users").document(user_email)
 
@@ -77,11 +81,13 @@ class ListOfChatsActivity : AppCompatActivity() {
                         newChatAdmin()
                     }
                 }
+                // Llamada al metodo EspressoIdlingResource (test)
+                EspressoIdlingResource.decrement()
             }
         // BORRAR - Modo revisión
-        if (Utilities.getTestMode()){
+        /*if (Utilities.getTestMode()){
             Thread.sleep(1000)
-        }
+        }*/
 
         // Actualizacion en tiempo real de la lista de chats
         user.collection("chats").addSnapshotListener { chats, error ->

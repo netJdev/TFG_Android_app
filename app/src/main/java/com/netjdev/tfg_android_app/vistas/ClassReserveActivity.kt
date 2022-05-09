@@ -18,6 +18,7 @@ import com.netjdev.tfg_android_app.databinding.ActivityClassReserveBinding
 import com.netjdev.tfg_android_app.modelos.ClassReserveDay
 import com.netjdev.tfg_android_app.modelos.ClassReserveTime
 import com.netjdev.tfg_android_app.modelos.UserClass
+import com.netjdev.tfg_android_app.util.EspressoIdlingResource
 import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_class_reserve.*
 import kotlinx.android.synthetic.main.activity_list_of_reserved_classes.*
@@ -93,12 +94,18 @@ class ClassReserveActivity : AppCompatActivity() {
             timeSelected(time)
         }
 
+        // Llamada al metodo EspressoIdlingResource (test)
+        EspressoIdlingResource.increment()
+
         // Referencia de almacenamiento desde la aplicacion
         var firestoreRef = firestore.collection("activities").document(className).collection("days")
             .orderBy("id", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { classes ->
                 listDays = classes.toObjects(ClassReserveDay::class.java)
+
+                // Llamada al metodo EspressoIdlingResource (test)
+                EspressoIdlingResource.decrement()
 
                 Log.d("Sport", "Lista de dias: ${listDays}")
                 // Activar los botones en funcion de la lista de dias
@@ -181,6 +188,9 @@ class ClassReserveActivity : AppCompatActivity() {
         // Guardar día de la semana seleccionado para usarlo en la selección de horario (timeSelected)
         weekdaySelected = dia
 
+        // Llamada al metodo EspressoIdlingResource (test)
+        EspressoIdlingResource.increment()
+
         // Referencia de almacenamiento desde la aplicacion
         firestore.collection("activities").document(className).collection("days")
             .document(dia).collection("time")
@@ -192,6 +202,9 @@ class ClassReserveActivity : AppCompatActivity() {
                 //Log.d("Sport", "Lista de horarios ${listTime.toString()}")
 
                 (listTimeRecyclerView.adapter as TimeAdapter).setData(listTime, diaNumero)
+
+                // Llamada al metodo EspressoIdlingResource (test)
+                EspressoIdlingResource.decrement()
             }
     }
 
@@ -204,6 +217,9 @@ class ClassReserveActivity : AppCompatActivity() {
 
         // Variable que indica si la clase seleccionada ya está reservada
         var claseYaReservada = false
+
+        // Llamada al metodo EspressoIdlingResource (test)
+        EspressoIdlingResource.increment()
 
         // Comprobar si la clase que quiere reservar el usuario ya la ha reservado previamente
         firestore
@@ -227,6 +243,9 @@ class ClassReserveActivity : AppCompatActivity() {
                     // Restar uno al número de plazas disponibles de la clase
                     val numPlazas = time.plazas.toInt() - 1
 
+                    // Llamada al metodo EspressoIdlingResource (test)
+                    EspressoIdlingResource.increment()
+
                     // Disminuir en 1 el número de plazas disponibles
                     firestore.collection("activities").document(className).collection("days")
                         .document(weekdaySelected).collection("time").document(time.name)
@@ -249,17 +268,23 @@ class ClassReserveActivity : AppCompatActivity() {
                             intent.putExtra("estado", "correcto")
                             startActivity(intent)
                             finish()
+                            // Llamada al metodo EspressoIdlingResource (test)
+                            EspressoIdlingResource.decrement()
                         }
                         .addOnFailureListener {
                             val intent = Intent(this, ConfirmReservationActivity::class.java)
                             intent.putExtra("estado", "incorrecto")
                             startActivity(intent)
                             finish()
+                            // Llamada al metodo EspressoIdlingResource (test)
+                            EspressoIdlingResource.decrement()
                         }
                 }else{
                     // Si la clase ya ha sido reservada, se le comunica al usuario con un mensaje
                     Toast.makeText(this, getString(R.string.class_already_booked), Toast.LENGTH_SHORT).show()
                 }
+                // Llamada al metodo EspressoIdlingResource (test)
+                EspressoIdlingResource.decrement()
             }
             .addOnFailureListener {
                 Log.d("Sport", "FAILURE: ${it}")

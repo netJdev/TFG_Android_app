@@ -19,7 +19,7 @@ class Utilities {
 
         // Devuelve true o false para controlar si la aplicación se comportará en modo revisión
         fun getTestMode(): Boolean {
-            return true
+            return false
         }
     }
 

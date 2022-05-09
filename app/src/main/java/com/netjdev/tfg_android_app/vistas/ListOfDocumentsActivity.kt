@@ -14,6 +14,7 @@ import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.adapters.DocumentAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityListOfDocumentsBinding
 import com.netjdev.tfg_android_app.modelos.Document
+import com.netjdev.tfg_android_app.util.EspressoIdlingResource
 import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_list_of_documents.*
 import kotlinx.android.synthetic.main.header.*
@@ -49,6 +50,9 @@ class ListOfDocumentsActivity : AppCompatActivity() {
             documentSelected(document)
         }
 
+        // Llamada al metodo EspressoIdlingResource (test)
+        EspressoIdlingResource.increment()
+
         // Referencia de almacenamiento desde la aplicacion a la categoria seleccionada
         var storageRef = storage.reference.child("documentos/${categoryName}")
         Log.d("Documento", storageRef.toString())
@@ -67,7 +71,9 @@ class ListOfDocumentsActivity : AppCompatActivity() {
                 val listaOrdenada = listDocs.sortedBy { it.cleanName }
                 //val listaOrdenada2 = listDocs.map { it.name }
                 (listDocumentsRecyclerView.adapter as DocumentAdapter).setData(listaOrdenada)
-              //(listDocTypeRecyclerView.adapter as DocCategoryAdapter).setData(listDocs)
+
+                // Llamada al metodo EspressoIdlingResource (test)
+                EspressoIdlingResource.decrement()
             }
             .addOnFailureListener {
                 Log.d("Documento", "fail")

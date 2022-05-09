@@ -1,33 +1,51 @@
 package com.netjdev.tfg_android_app
 
-import androidx.test.core.app.ActivityScenario
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
+import com.netjdev.tfg_android_app.util.EspressoIdlingResource
 import com.netjdev.tfg_android_app.vistas.MainActivity
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4ClassRunner::class)
+// Esta anotación (@LargeTest) indica que se realizaran accesos a recursos externos, como redes
+@LargeTest
+@RunWith(AndroidJUnit4::class)
 class RealizarPagoTest {
+
+    @get:Rule
+    val activityTestRule = ActivityScenarioRule(MainActivity::class.java)
+
+    @Before
+    fun setUp(){
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
+    }
+
+    @After
+    fun tearDown(){
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
+    }
+
     @Test
     fun realizarPagoTest() {
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-
-        Espresso.onView(ViewMatchers.withId(R.id.drawer_layout))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.btnPayments)).perform(ViewActions.click())
+        onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()))
+        onView(withId(R.id.btnPayments)).perform(click())
         // Comprobar que se ha cargado la activity StripeActivity
-        Espresso.onView(ViewMatchers.withId(R.id.activity_stripe))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withId(R.id.activity_stripe)).check(matches(isDisplayed()))
         // Comprbar que existe el botón Pay antes de pulsarlo
-        Espresso.onView(ViewMatchers.withId(R.id.btnPay))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withId(R.id.btnPay)).check(matches(isDisplayed()))
         // Pulsar el botón Pay para realizar el pago
-        Espresso.onView(ViewMatchers.withId(R.id.btnPay)).perform(ViewActions.click())
-        // El alcance del test temina aquí, ya que el resto del proceso de pago (introducir tarjet)
+        onView(withId(R.id.btnPay)).perform(click())
+        // El alcance del test temina aquí, ya que el resto del proceso de pago (introducir tarjeta)
         // está delegado a la api de Stripe
     }
 }
