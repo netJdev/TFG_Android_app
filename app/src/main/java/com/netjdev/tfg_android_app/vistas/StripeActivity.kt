@@ -105,7 +105,7 @@ class StripeActivity : AppCompatActivity() {
     }
 
     /**
-     * Clase para comprobar los pagos del usuario, si no está pagado el mes actual se permite
+     * Metodo para comprobar los pagos del usuario, si no está pagado el mes actual se permite
      * realizar el pago
      */
     private fun checkUserPays() {

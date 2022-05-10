@@ -63,11 +63,6 @@ class ListOfGroupClassesActivity : AppCompatActivity() {
                 // Llamada al metodo EspressoIdlingResource (test)
                 EspressoIdlingResource.decrement()
             }
-
-        // BORRAR - Modo revisión
-        /*if (Utilities.getTestMode()){
-            Thread.sleep(1000)
-        }*/
     }
 
     private fun groupClassSelected(groupClass: GroupClass) {

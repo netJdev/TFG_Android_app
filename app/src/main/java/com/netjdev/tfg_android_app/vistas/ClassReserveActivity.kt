@@ -289,10 +289,6 @@ class ClassReserveActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Log.d("Sport", "FAILURE: ${it}")
             }
-        // BORRAR - Modo revisión
-        /*if (Utilities.getTestMode()){
-            Thread.sleep(2000)
-        }*/
     }
 
     private fun printDate(diaSeleccionado: Int) {

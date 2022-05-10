@@ -84,10 +84,6 @@ class ListOfChatsActivity : AppCompatActivity() {
                 // Llamada al metodo EspressoIdlingResource (test)
                 EspressoIdlingResource.decrement()
             }
-        // BORRAR - Modo revisión
-        /*if (Utilities.getTestMode()){
-            Thread.sleep(1000)
-        }*/
 
         // Actualizacion en tiempo real de la lista de chats
         user.collection("chats").addSnapshotListener { chats, error ->

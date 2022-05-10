@@ -60,7 +60,9 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     private lateinit var btnNotifications: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        // Fijar orientación vertical
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMenuPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -1,6 +1,7 @@
 package com.netjdev.tfg_android_app.vistas
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -24,8 +25,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Fijar orientación vertical
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         // Fijar tema principal tras la carga del splash sceen
-        // Thread.sleep(2000) //BORRAR
         setTheme(R.style.Theme_TFG_Android_app)
 
         super.onCreate(savedInstanceState)

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -63,28 +64,14 @@ class ListOfDocCategoryActivity : AppCompatActivity() {
                     listDocs.add(docType)
                 }
                 (listDocTypeRecyclerView.adapter as DocCategoryAdapter).setData(listDocs)
-                /*prefixes.forEach { prefix ->
-                    Log.d("Storage", prefix.toString())
-                    prefix.listAll()
-                        .addOnSuccessListener { (nuevoitems, nuevoprefixes) ->
-                            nuevoitems.forEach { item ->
-                                Log.d("Storage", item.toString())
-                            }
-                        }
-                }*/
-
-                /*items.forEach { item ->
-                    Log.d("Storage", item.toString())
-                }*/
             }
             .addOnFailureListener {
-                // Fallo
+                Toast.makeText(
+                    this,
+                    "Se ha producido un fallo en la carga del documento",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-        // BORRAR - Modo revisión
-        if (Utilities.getTestMode()){
-            Thread.sleep(1000)
-        }
-
     }
 
     private fun docCategorySelected(docCategory: DocCategory) {
