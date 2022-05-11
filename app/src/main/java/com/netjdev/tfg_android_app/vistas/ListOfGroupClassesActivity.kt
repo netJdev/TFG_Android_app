@@ -3,7 +3,6 @@ package com.netjdev.tfg_android_app.vistas
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
@@ -13,7 +12,6 @@ import com.netjdev.tfg_android_app.adapters.GroupClassAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityListOfGroupClassesBinding
 import com.netjdev.tfg_android_app.modelos.GroupClass
 import com.netjdev.tfg_android_app.util.EspressoIdlingResource
-import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_list_of_group_classes.*
 import kotlinx.android.synthetic.main.header.*
 
@@ -55,7 +53,6 @@ class ListOfGroupClassesActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { activities ->
                 val listGroupClasses = activities.toObjects(GroupClass::class.java)
-                //Log.d("Sport", listGroupClasses.toString())
 
                 // Pasar al adapter del RecyclerView los datos que se cargaran (lista de classes)
                 (listGroupClassesRecyclerView.adapter as GroupClassAdapter).setData(listGroupClasses)

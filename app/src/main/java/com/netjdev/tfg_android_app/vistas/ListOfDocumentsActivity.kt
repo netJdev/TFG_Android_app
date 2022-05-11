@@ -3,7 +3,6 @@ package com.netjdev.tfg_android_app.vistas
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.ktx.Firebase
@@ -55,10 +54,8 @@ class ListOfDocumentsActivity : AppCompatActivity() {
 
         // Referencia de almacenamiento desde la aplicacion a la categoria seleccionada
         var storageRef = storage.reference.child("documentos/${categoryName}")
-        Log.d("Documento", storageRef.toString())
         storageRef.listAll()
             .addOnSuccessListener { (items, prefixes) ->
-                Log.d("Documento", "On success")
                 val listDocs: MutableList<Document> = mutableListOf()
                 items.forEach { item ->
                     val document = Document(
@@ -76,7 +73,6 @@ class ListOfDocumentsActivity : AppCompatActivity() {
                 EspressoIdlingResource.decrement()
             }
             .addOnFailureListener {
-                Log.d("Documento", "fail")
             }
 
     }

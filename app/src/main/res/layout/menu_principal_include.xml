@@ -7,62 +7,69 @@
     android:background="@drawable/fondo_02">
 
     <Button
-        android:id="@+id/btnChat"
+        android:id="@+id/btnPayments"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="100dp"
-        android:elevation="12dp"
-        android:text="@string/btn_chat"
-        app:layout_constraintBottom_toTopOf="@+id/btnNotifications"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/btn_payments"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnActivities"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnDocs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="244dp"
-        android:layout_marginEnd="46dp"
-        android:text="@string/btn_docs"
-        app:layout_constraintEnd_toStartOf="@+id/btnNotifications"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnNotifications" />
 
     <Button
         android:id="@+id/btnNotifications"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="29dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/btn_notifications"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnDocs"
+        app:layout_constraintBottom_toTopOf="@+id/btnPayments"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnDocs" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDocs" />
+
+    <Button
+        android:id="@+id/btnDocs"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/btn_docs"
+        app:layout_constraintBottom_toTopOf="@+id/btnNotifications"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnChat" />
+
+    <Button
+        android:id="@+id/btnChat"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/btn_chat"
+        app:layout_constraintBottom_toTopOf="@+id/btnDocs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnActivities" />
 
     <Button
         android:id="@+id/btnActivities"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="45dp"
-        android:background="@drawable/fondo_btn_classes"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:elevation="20dp"
         android:text="@string/group_classes"
-        android:elevation="10dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnChat"
-        app:layout_constraintEnd_toStartOf="@+id/btnChat"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnPayments"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="272dp"
-        android:text="@string/btn_payments"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnChat"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

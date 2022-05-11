@@ -13,7 +13,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@color/fondo_naranja"
         android:padding="16dp">
 
         <TextView
@@ -24,7 +24,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="Doc type"
-            android:textColor="#76746a"
+            android:textColor="@color/texto_oscuro"
             android:textSize="20sp"
             android:textStyle="bold" />
 

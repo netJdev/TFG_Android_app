@@ -6,8 +6,6 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -20,21 +18,13 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
-import com.netjdev.tfg_android_app.BuildConfig
 import com.netjdev.tfg_android_app.R
-import com.netjdev.tfg_android_app.adapters.ChatAdapter
-import com.netjdev.tfg_android_app.adapters.MessageAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityMenuPrincipalBinding
 import com.netjdev.tfg_android_app.modelos.Chat
-import com.netjdev.tfg_android_app.modelos.Message
-import kotlinx.android.synthetic.main.activity_chat.*
-import kotlinx.android.synthetic.main.activity_list_of_chats.*
 import kotlinx.android.synthetic.main.activity_menu_principal.*
-import kotlinx.android.synthetic.main.menu_principal_include.*
 
 class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -52,9 +42,6 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     // Menu lateral
     private lateinit var drawer: DrawerLayout
     private lateinit var toogle: ActionBarDrawerToggle
-
-    // Variable TAG para Log
-    private val TAG = "Sport"
 
     // Variables de botones
     private lateinit var btnNotifications: Button
@@ -94,10 +81,6 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
         intent.getStringExtra("user_email")?.let { user_email = it }
 
-        //binding.textView6.text = user_email
-        //val txtview6 = findViewById<TextView>(R.id.textView6)
-        //textView.text = user_email
-
         if (user_email.isNotEmpty()) {
             //notifications()
             initComponents()
@@ -107,43 +90,32 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     override fun onResume() {
         super.onResume()
-        // Listener del chat
-        //checkNewMessages()
     }
 
     private fun notifications() {
-        Log.d(TAG, "Entrada de notificación")
 
         if (intent.extras != null) {
-            Log.d(TAG, "Notificación en segundo plano")
-            Log.d(TAG, "Intent extra title: ${intent.extras!!.getString("title")}")
+            //Log.d(TAG, "Notificación en segundo plano")
+            //Log.d(TAG, "Intent extra title: ${intent.extras!!.getString("title")}")
         }
 
         // Recibir notificacion dirigida a un solo usuario
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
-                Log.d(TAG, "Fetching FCM registration token failed", task.exception)
                 return@OnCompleteListener
             }
-
             val token = task.result
-
-            // Log
-            //Log.d(TAG, token)
         })
     }
 
     private fun initComponents() {
         // Id de la aplicación
-        Log.d("Sport", "Package Name: ${BuildConfig.APPLICATION_ID}")
+        //Log.d("Sport", "Package Name: ${BuildConfig.APPLICATION_ID}")
 
         // Recibir data de notificacion
         if (intent.extras != null) {
             val title = intent.extras!!["title"].toString()
             val body = intent.extras!!["body"].toString()
-
-            Log.d(TAG, "Notificación title: $title")
-            Log.d(TAG, "Notificación body: $body")
         }
 
 
@@ -154,24 +126,22 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         userEmail.text = user_email
 
         // Botones
-        //binding.btnChat.setOnClickListener { chat() }
+
         val btnChat = findViewById<Button>(R.id.btnChat)
         btnChat.setOnClickListener { chat() }
-        //binding.btnDocs.setOnClickListener { documents() }
+
         val btnDocs = findViewById<Button>(R.id.btnDocs)
         btnDocs.setOnClickListener { documents() }
-        //
+
         val btnActivities = findViewById<Button>(R.id.btnActivities)
         btnActivities.setOnClickListener { groupClasses() }
-        //
+
         val btnPayments = findViewById<Button>(R.id.btnPayments)
         btnPayments.setOnClickListener { payments() }
 
         btnNotifications = findViewById(R.id.btnNotifications)
         btnNotifications.setOnClickListener { notificationsBTN() }
 
-        // Listener del chat
-        //checkNewMessages()
     }
 
     private fun chat() {
@@ -182,14 +152,13 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     private fun documents() {
         val intent = Intent(this, ListOfDocCategoryActivity::class.java)
-        //intent.putExtra("user_email", user_email)
         startActivity(intent)
     }
 
     private fun notificationsBTN() {
         val intent = Intent(this, NotificationsActivity::class.java)
-        intent.putExtra("message_name", "Este es el nombre")
-        intent.putExtra("message_content", "Este es el mensaje")
+        intent.putExtra("message_name", "Name")
+        intent.putExtra("message_content", "Body")
         startActivity(intent)
     }
 
@@ -281,7 +250,6 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Log.d("Sportcenter", "onOptionsItemSelected")
         if (toogle.onOptionsItemSelected(item)) {
             return true
         }
@@ -300,9 +268,6 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             .addOnSuccessListener { chats ->
                 // Casting de los documentos descargados de la coleccion a objetos Chat
                 val listChats = chats.toObjects(Chat::class.java)
-
-                // Pasar al adapter del RecyclerView los datos que se cargaran (lista de chats)
-                //(listChatsRecyclerView.adapter as ChatAdapter).setData(listChats)
 
                 // Si el user no es el admin, se salta este activity y pasa directamente al chat
                 if (user_email != "admin@email.com") {

@@ -3,7 +3,6 @@ package com.netjdev.tfg_android_app.vistas
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -133,12 +132,9 @@ class StripeActivity : AppCompatActivity() {
             .addOnSuccessListener { pagos ->
                 val listaPagos = pagos.toObjects(Pago::class.java)
                 if (listaPagos.isEmpty()) {
-                    Log.d("Sport", "0")
                     binding.txtPagoTop.text = getString(R.string.current_fee)
                     binding.txtPago.text = "${getString(identificador)} - ${cuotaActual.get(Calendar.YEAR)}"
                     binding.txtPrice.text = "${precioCuota.toString()} ${getString(R.string.currency_symbol)}"
-                    //binding.btnPay.isEnabled = true
-                    //habilitarPago = true
                     binding.btnPay.isEnabled = true
                 } else {
                     // Seleccionar el último pago realizado
@@ -146,19 +142,14 @@ class StripeActivity : AppCompatActivity() {
                     ultimaCuota.time = listaPagos[0].cuotaPagada!!
                     val compareDate = ultimaCuota.time.compareTo(cuotaActual.time)
 
-                    Log.d("Sport", compareDate.toString())
                     // Caso en el que la última cuota pagada es anterior a la actual
                     if (compareDate == -1) {
-                        Log.d("Sport", compareDate.toString())
                         binding.txtPagoTop.text = getString(R.string.current_fee)
                         binding.txtPago.text = "${getString(identificador)} - ${cuotaActual.get(Calendar.YEAR)}"
-                        //binding.txtPago.text = getString(R.string.fee_already_paid, getString(identificador), cuotaActual.get(Calendar.YEAR))
                         binding.txtPrice.text = "${precioCuota.toString()} ${getString(R.string.currency_symbol)}"
-                        //habilitarPago = true
                         binding.btnPay.isEnabled = true
                         // Caso en el que la última cuota es la actual
                     } else if (compareDate == 0) {
-                        Log.d("Sport", compareDate.toString())
                         // Informar al usuario que está al corriente de pagos
                         binding.txtPagoTop.text = ""
                         binding.txtPago.text = "La cuota actual (${getString(identificador)} - ${cuotaActual.get(Calendar.YEAR)}) ya está pagada"
@@ -178,8 +169,6 @@ class StripeActivity : AppCompatActivity() {
                     try {
                         val responseJson = JSONObject(response)
                         customerID = responseJson.getString("id")
-
-                        //Toast.makeText(this, customerID, Toast.LENGTH_SHORT).show()
 
                         // Obtener la ephemeral key
                         getEphemeralKey(customerID)
@@ -209,8 +198,6 @@ class StripeActivity : AppCompatActivity() {
                     try {
                         val responseJson = JSONObject(response)
                         EphemeralKey = responseJson.getString("id")
-
-                        //Toast.makeText(this, EphemeralKey, Toast.LENGTH_SHORT).show()
 
                         // Obtener la ephemeral key
                         getClientSecret(customerID, EphemeralKey)
@@ -248,13 +235,7 @@ class StripeActivity : AppCompatActivity() {
                         val responseJson = JSONObject(response)
                         ClientSecret = responseJson.getString("client_secret")
 
-                        //Toast.makeText(this, ClientSecret, Toast.LENGTH_SHORT).show()
                         paymentFlow()
-                        // Desbloquear boton de pago tras la obtención de los credenciales
-                        /*if (habilitarPago){
-                            binding.btnPay.isEnabled = true
-                        }*/
-
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
@@ -273,7 +254,6 @@ class StripeActivity : AppCompatActivity() {
                 params["customer"] = customerID
                 // En el parametro amount (cantidad del pago) los dos últimos ceros son para decimales:
                 // 1225 = 12.25 EUR
-                //params["amount"] = "1225"
                 // Añadir dos 0 al final del precio que son los decimales
                 params["amount"] = precioCuota.toString() + "00"
                 params["currency"] = "eur"
@@ -299,15 +279,10 @@ class StripeActivity : AppCompatActivity() {
     private fun onPaymentSheetResult(paymentSheetResult: PaymentSheetResult) {
         when (paymentSheetResult) {
             is PaymentSheetResult.Canceled -> {
-                //print("Canceled")
-                //Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show()
                 // Ocultar progressbar
                 binding.includeProgressbar.progressbar.visibility = View.GONE
             }
             is PaymentSheetResult.Failed -> {
-                //print("Error: ${paymentSheetResult.error}")
-                //Toast.makeText(this, "Error: ${paymentSheetResult.error}", Toast.LENGTH_SHORT).show()
-
                 // Ocultar progressbar
                 binding.includeProgressbar.progressbar.visibility = View.GONE
 
@@ -315,10 +290,6 @@ class StripeActivity : AppCompatActivity() {
                     .show()
             }
             is PaymentSheetResult.Completed -> {
-                // Display for example, an order confirmation screen
-                //print("Completed")
-                //Toast.makeText(this, "Pago completado", Toast.LENGTH_SHORT).show()
-
                 // Ocultar progressbar
                 binding.includeProgressbar.progressbar.visibility = View.GONE
                 // Guardar el pago en Firebase

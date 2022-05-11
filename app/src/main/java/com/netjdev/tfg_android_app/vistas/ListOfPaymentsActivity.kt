@@ -2,7 +2,6 @@ package com.netjdev.tfg_android_app.vistas
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.Query
@@ -12,7 +11,6 @@ import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.adapters.PaymentAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityListOfPaymentsBinding
 import com.netjdev.tfg_android_app.modelos.Pago
-import com.netjdev.tfg_android_app.modelos.UserClass
 import kotlinx.android.synthetic.main.activity_list_of_payments.*
 import kotlinx.android.synthetic.main.header.*
 
@@ -45,7 +43,6 @@ class ListOfPaymentsActivity : AppCompatActivity() {
 
         binding.listPaymentsRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.listPaymentsRecyclerView.adapter = PaymentAdapter { pago ->
-            //
         }
 
         firestore.collection("users").document(user_email).collection("payments")
@@ -60,7 +57,6 @@ class ListOfPaymentsActivity : AppCompatActivity() {
 
             }
             .addOnFailureListener {
-                Log.d("Sport", "FAILURE: ${it}")
             }
     }
 }

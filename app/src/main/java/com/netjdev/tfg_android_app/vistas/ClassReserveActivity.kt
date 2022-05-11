@@ -7,21 +7,17 @@ import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.Query
 import com.netjdev.tfg_android_app.R
-import com.netjdev.tfg_android_app.adapters.ReservedClassAdapter
 import com.netjdev.tfg_android_app.adapters.TimeAdapter
 import com.netjdev.tfg_android_app.databinding.ActivityClassReserveBinding
 import com.netjdev.tfg_android_app.modelos.ClassReserveDay
 import com.netjdev.tfg_android_app.modelos.ClassReserveTime
 import com.netjdev.tfg_android_app.modelos.UserClass
 import com.netjdev.tfg_android_app.util.EspressoIdlingResource
-import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_class_reserve.*
-import kotlinx.android.synthetic.main.activity_list_of_reserved_classes.*
 import kotlinx.android.synthetic.main.header.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -78,9 +74,6 @@ class ClassReserveActivity : AppCompatActivity() {
 
         printDate(calendar.get(Calendar.DAY_OF_WEEK))
 
-        //Log.d("Sport", "WEEKDAY: ${calendar.get(Calendar.DAY_OF_WEEK)}")
-        //Log.d("Sport", "WEEKDAY: ${calendar.time}")
-
         // Deshabilitar botones de selección de dia
         btnMonday.isEnabled = false
         btnTuesday.isEnabled = false
@@ -128,9 +121,6 @@ class ClassReserveActivity : AppCompatActivity() {
             // Sumar dias para hacer pruebas
             //calendar.add(Calendar.DATE, 1)
             val weekday = calendar.get(Calendar.DAY_OF_WEEK)
-
-            //Log.d("Sport", "Dia id: ${day.id}")
-            //Log.d("Sport", "Weekday: ${weekday}")
 
             when (day.name) {
                 btnMonday.tag -> {
@@ -198,8 +188,6 @@ class ClassReserveActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { classes ->
                 listTime = classes.toObjects(ClassReserveTime::class.java)
-                //listTime = classes.toObjects(ClassReserveTime::class.java)
-                //Log.d("Sport", "Lista de horarios ${listTime.toString()}")
 
                 (listTimeRecyclerView.adapter as TimeAdapter).setData(listTime, diaNumero)
 
@@ -287,7 +275,7 @@ class ClassReserveActivity : AppCompatActivity() {
                 EspressoIdlingResource.decrement()
             }
             .addOnFailureListener {
-                Log.d("Sport", "FAILURE: ${it}")
+                //Log.d("Sport", "FAILURE: ${it}")
             }
     }
 
@@ -318,14 +306,12 @@ class ClassReserveActivity : AppCompatActivity() {
             }
         }
 
-        //val txtCalendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
         selectedDay = Calendar.getInstance()
         selectedDay.time = currentDate
         selectedDay.add(Calendar.DATE, diaSeleccionado - calendar.get(Calendar.DAY_OF_WEEK))
 
         val formatter: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
         val dia = formatter.format(selectedDay.time)
-        //Log.d("Sport", "Fecha formateada: ${dia}")
         txtCurrenDay.text = "$diaLetra - $dia"
     }
 }

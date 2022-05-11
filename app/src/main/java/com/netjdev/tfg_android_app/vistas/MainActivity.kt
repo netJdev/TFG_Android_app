@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         binding.btnResetPassword.setOnClickListener { resetPassword() }
 
         checkUser()
-
     }
 
     private fun checkUser() {

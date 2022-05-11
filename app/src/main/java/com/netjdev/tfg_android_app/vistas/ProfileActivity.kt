@@ -3,7 +3,6 @@ package com.netjdev.tfg_android_app.vistas
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.preference.PreferenceManager
@@ -57,8 +56,6 @@ class ProfileActivity : AppCompatActivity() {
             loadFirestoreUserData()
         }
 
-        // **BORRAR
-        //removeSharedPreferences()
     }
 
     private fun loadFirestoreUserData() {
@@ -66,15 +63,12 @@ class ProfileActivity : AppCompatActivity() {
             .document("user_profile")
             .get()
             .addOnSuccessListener { documento ->
-                Log.d("Usuario", documento.toString())
                 // Si el documento no existe en Firestore se crea, si existe se guarda en shared preferences
                 if (documento.exists()) {
-                    Log.d("Usuario", "EXISTE")
                     val user_data = documento.toObject(User::class.java)
                     // Guardar los datos en Shared preferences
                     saveSharedPreferences(user_data!!)
                 } else {
-                    Log.d("Usuario", "NO EXISTE")
                     createUserData(user_email)
                 }
             }
@@ -92,7 +86,6 @@ class ProfileActivity : AppCompatActivity() {
         )
         firestore.collection("users").document(user).collection("profile").document("user_profile")
             .set(profile)
-        //firestore.collection("users").document(user).set(profile)
 
         saveSharedPreferences(profile)
     }

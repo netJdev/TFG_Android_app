@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityConfirmReservationBinding
 import kotlinx.android.synthetic.main.header.*
@@ -29,8 +27,6 @@ class ConfirmReservationActivity : AppCompatActivity() {
     }
 
     private fun initComponents() {
-        // Ocultar action bar
-        //supportActionBar?.hide()
 
         // Texto de la cabecera
         val text_header: TextView = findViewById(R.id.txtHeader)

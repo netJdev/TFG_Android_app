@@ -42,7 +42,6 @@ class MessageAdapter(private val user: String) :
             holder.itemView.myMessageLayout.visibility = View.VISIBLE
             holder.itemView.otherMessageLayout.visibility = View.GONE
             holder.itemView.tvMyMsg.text = message.message
-            //holder.itemView.tvDateMyMsg.text = message.date.toString()
             calendar.time = message.date
             val time = String.format("%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
             holder.itemView.tvDateMyMsg.text = time
@@ -50,7 +49,6 @@ class MessageAdapter(private val user: String) :
             holder.itemView.myMessageLayout.visibility = View.GONE
             holder.itemView.otherMessageLayout.visibility = View.VISIBLE
             holder.itemView.tvOtherMsg.text = message.message
-            //holder.itemView.tvDateOtherMsg.text = message.date.toString()
             calendar.time = message.date
             val time = String.format("%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE))
             holder.itemView.tvDateOtherMsg.text = time

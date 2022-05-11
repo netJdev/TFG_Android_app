@@ -3,7 +3,6 @@ package com.netjdev.tfg_android_app.vistas
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,12 +10,10 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityListOfDocCategoryBinding
-//
 import com.google.firebase.storage.ktx.component1
 import com.google.firebase.storage.ktx.component2
 import com.netjdev.tfg_android_app.adapters.DocCategoryAdapter
 import com.netjdev.tfg_android_app.modelos.DocCategory
-import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_list_of_doc_category.*
 import kotlinx.android.synthetic.main.header.*
 
@@ -56,8 +53,6 @@ class ListOfDocCategoryActivity : AppCompatActivity() {
                 val listDocs: MutableList<DocCategory> = mutableListOf()
 
                 prefixes.forEach { prefix ->
-                    Log.d("Storage", prefix.name)
-                    //val docTypeName: String = prefix.name
                     val docType = DocCategory(
                         name = prefix.name
                     )

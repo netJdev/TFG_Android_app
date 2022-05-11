@@ -5,15 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.adapters.MessageAdapter
 import com.netjdev.tfg_android_app.modelos.Message
 import com.netjdev.tfg_android_app.databinding.ActivityChatBinding
-import com.netjdev.tfg_android_app.util.Utilities
 import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.header.*
 
 class ChatActivity : AppCompatActivity() {
 
@@ -22,9 +24,6 @@ class ChatActivity : AppCompatActivity() {
 
     private var chatId = ""
     private var user = ""
-
-    // Etiqueta para el log *BORRAR
-    private val TAG = "Firestore"
 
     private var firestore = Firebase.firestore
 
@@ -43,6 +42,11 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun initComponents() {
+        // Texto de la cabecera
+        val text_header: TextView = findViewById(R.id.txtHeader)
+        text_header.text = getString(R.string.btn_chat)
+        btnHeader.setOnClickListener { onBackPressed() }
+
         messagesRecyclerView.layoutManager = LinearLayoutManager(this)
         messagesRecyclerView.adapter = MessageAdapter(user)
 
@@ -58,7 +62,6 @@ class ChatActivity : AppCompatActivity() {
                 (messagesRecyclerView.adapter as MessageAdapter).setData(listMessages)
                 // Situarse al final del RecyclerView
                 messagesRecyclerView.scrollToPosition(messages.size() - 1)
-                Log.d(TAG, "Primera lectura de mensajes de Firestore ${messages.size()}")
             }
 
         // Actialización de mensajes en tiempo real
@@ -70,10 +73,6 @@ class ChatActivity : AppCompatActivity() {
                         (messagesRecyclerView.adapter as MessageAdapter).setData(listMessages)
                         // Situarse al final del RecyclerView
                         messagesRecyclerView.scrollToPosition(messages.size() - 1)
-                        Log.d(
-                            TAG,
-                            "Actualizacion tiempo real de mensajes de Firestore ${messages.size()}"
-                        )
                     }
                 }
             }

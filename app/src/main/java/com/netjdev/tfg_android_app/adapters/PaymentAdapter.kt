@@ -1,15 +1,12 @@
 package com.netjdev.tfg_android_app.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.common.io.Resources
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.modelos.Pago
 import com.netjdev.tfg_android_app.util.Utilities
-import kotlinx.android.synthetic.main.item_group_class.view.*
 import kotlinx.android.synthetic.main.item_payment.view.*
 import java.util.*
 
@@ -41,11 +38,6 @@ class PaymentAdapter(val paymentClick: (Pago) -> Unit) :
         val mes = Utilities.getMonthName(pago)
         // Obtener identificador del mes
         val identificador = context.resources.getIdentifier(mes.lowercase(), "string", context.packageName)
-
-        //int resourceID = getResources().getIdentifier("ball_red", "drawable", getPackageName());
-        //int resId=context.getResources().getIdentifier("ball_red", "drawable", context.getPackageName());
-        //val identificador =
-        //            this.resources.getIdentifier(mes.lowercase(), "string", this.packageName)
 
         val cuota = "${context.getString(identificador)} - ${pago.get(Calendar.YEAR)}"
         holder.itemView.txtPayName.text = cuota

@@ -2,7 +2,6 @@ package com.netjdev.tfg_android_app.vistas
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -70,10 +69,8 @@ class ListOfReservedClassesActivity : AppCompatActivity() {
                 val listUserClasses = userClasses.toObjects(UserClass::class.java)
                 val listaClasesPendientes: MutableList<UserClass> = mutableListOf()
                 listUserClasses.forEach {
-                    //Log.d("Sport", "Fecha Actual: ${fechaActual.time}")
-                    //Log.d("Sport", "Fecha Clase: ${it.date}")
                     val compararFecha = it.date?.compareTo(fechaActual.time)
-                    //Log.d("Sport", "Comparar: ${compararFecha}")
+
                     if (compararFecha != null) {
                         if (compararFecha >= 0) {
                             listaClasesPendientes.add(it)
@@ -87,7 +84,6 @@ class ListOfReservedClassesActivity : AppCompatActivity() {
 
             }
             .addOnFailureListener {
-                Log.d("Sport", "FAILURE: ${it}")
             }
 
         // Actualización de la lista de clases en tiempo real
@@ -106,9 +102,6 @@ class ListOfReservedClassesActivity : AppCompatActivity() {
     }
 
     private fun deleteReservedClassSelected(userClass: UserClass) {
-        //var texto = "Clase borrada -> ${userClass.id}"
-        //Toast.makeText(this, texto, Toast.LENGTH_SHORT).show()
-
         // Borrar clase de las clases del usuario
         firestore.collection("users").document(user_email).collection("classes")
             .document(userClass.id!!)

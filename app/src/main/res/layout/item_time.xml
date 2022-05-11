@@ -7,43 +7,15 @@
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
     card_view:cardBackgroundColor="#ffffff"
-    card_view:cardCornerRadius="3dp"
+    card_view:cardCornerRadius="10dp"
     card_view:cardElevation="6dp"
     card_view:contentPadding="1dp">
-
-    <!--<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:padding="16dp">
-
-        <TextView
-            android:id="@+id/timeNameText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="Time"
-            android:textColor="#76746a"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:text="+" />
-
-    </RelativeLayout>-->
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="@drawable/fondo_recycler_time">
 
         <TextView
             android:id="@+id/txtTime"
