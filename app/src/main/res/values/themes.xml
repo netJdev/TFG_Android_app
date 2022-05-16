@@ -31,4 +31,20 @@
     </style>
     <style name="Theme.TFG_Android_app.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- Tema transparente -->
+    <style name="Theme.Transparent" parent="Theme.TFG_Android_app">
+        <!--color del background transparente-->
+        <item name="android:background">@android:color/transparent</item>
+        <!--no mostrar la status bar-->
+        <item name="android:windowNoTitle">true</item>
+        <!--color del background de la ventana transparente-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--background cache hint null-->
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <!--ventana translucida true-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--estilo de animación de ventana-->
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+
 </resources>

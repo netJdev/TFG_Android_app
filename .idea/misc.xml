@@ -11,6 +11,8 @@
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/fondo_my_msg.xml" value="0.243" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/fondo_notificacion_cuerpo.xml" value="0.333" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/fondo_notificacion_nombre.xml" value="0.333" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/fondo_notification.xml" value="0.3175" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/fondo_notification_body.xml" value="0.3175" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/fondo_other_msg.xml" value="0.243" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/fondo_progressbar.xml" value="0.296" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/drawable/fondo_recycler_time.xml" value="0.1945" />
@@ -50,6 +52,7 @@
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_document.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_group_class.xml" value="0.24427083333333333" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_message.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_notification.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_payment.xml" value="0.3442028985507246" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_time.xml" value="0.24427083333333333" />
         <entry key="..\:/Users/netju/AndroidStudioProjects/TFG_Android_app/app/src/main/res/layout/item_user_class.xml" value="0.3442028985507246" />

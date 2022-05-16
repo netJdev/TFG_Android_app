@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_notification"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    card_view:cardBackgroundColor="#ffffff"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="0dp"
+    card_view:contentPadding="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/fondo_notification_body">
+
+    <ImageView
+        android:id="@+id/ic_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toTopOf="parent"
+        card_view:srcCompat="@android:drawable/stat_notify_chat"
+        card_view:tint="@color/naranja" />
+
+    <TextView
+        android:id="@+id/txtNotificationName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/btn_notifications"
+        card_view:layout_constraintBottom_toBottomOf="@+id/ic_notification"
+        card_view:layout_constraintStart_toEndOf="@+id/ic_notification"
+        card_view:layout_constraintTop_toTopOf="@+id/ic_notification" />
+
+        <TextView
+            android:id="@+id/txtNotificationDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Date"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/ic_notification" />
+
+        <TextView
+            android:id="@+id/txtNotificationBody"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/txtNotificationDate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

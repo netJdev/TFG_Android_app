@@ -5,35 +5,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_notifications"
+    android:background="@drawable/fondo_notification"
+    android:padding="10dp"
     tools:context=".vistas.NotificationsActivity">
 
-    <include
+    <!--<include
         android:id="@+id/include"
         layout="@layout/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" />-->
 
-    <TextView
-        android:id="@+id/txtMessageName"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/fondo_notificacion_nombre"
         android:padding="10dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        android:background="@drawable/fondo_notification_body"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="10dp">
 
-    <TextView
-        android:id="@+id/txtMessageContent"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/fondo_notificacion_cuerpo"
-        android:padding="10dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMessageName" />
+        <ImageView
+            android:id="@+id/ic_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/stat_notify_chat"
+            app:tint="@color/naranja" />
+
+        <TextView
+            android:id="@+id/txtNotification"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/btn_notifications"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_notification"
+            app:layout_constraintStart_toEndOf="@+id/ic_notification"
+            app:layout_constraintTop_toTopOf="@+id/ic_notification" />
+
+        <TextView
+            android:id="@+id/txtMessageName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ic_notification" />
+
+        <TextView
+            android:id="@+id/txtShowNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/show"
+            android:textColor="@color/naranja"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtMessageName" />
+
+        <TextView
+            android:id="@+id/txtCloseNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="@string/close"
+            android:textColor="@color/naranja"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/txtShowNotification"
+            app:layout_constraintTop_toTopOf="@+id/txtShowNotification" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -89,4 +89,5 @@
     <string name="fee_already_paid">The current fee (%s - %d) is already paid</string>
     <string name="pay_fee">Pay fee</string>
     <string name="notifications">Notifications</string>
+    <string name="show">Show</string>
 </resources>

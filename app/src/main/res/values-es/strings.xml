@@ -82,4 +82,5 @@
     <string name="fee_already_paid">La cuota actual (%d - %d) ya está pagada</string>
     <string name="pay_fee">Pagar cuota</string>
     <string name="notifications">Notificaciones</string>
+    <string name="show">Ver</string>
 </resources>
