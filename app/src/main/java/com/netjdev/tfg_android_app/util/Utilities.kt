@@ -27,7 +27,7 @@ class Utilities {
             val dayMonth = String.format(
                 "%02d-%02d",
                 calendar.get(Calendar.DAY_OF_MONTH),
-                calendar.get(Calendar.MONTH)
+                calendar.get(Calendar.MONTH)+1
             )
             dateString = "$dayMonth-${calendar.get(Calendar.YEAR)}"
             dateString += " ${calendar.get(Calendar.HOUR_OF_DAY)}"

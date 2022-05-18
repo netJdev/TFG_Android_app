@@ -50,6 +50,7 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnGuardar.setOnClickListener { editFirestoreUserData() }
 
         // Si Shared preferences esta vacío, se carga de Firestore
+        // El valor predeterminado es empty, si shared preferences está vacio
         if (prefs.getString("email", "empty")!! != "empty") {
             loadComponents()
         } else {

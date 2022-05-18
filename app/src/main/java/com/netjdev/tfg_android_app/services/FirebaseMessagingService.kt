@@ -1,11 +1,8 @@
 package com.netjdev.tfg_android_app.services
 
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.vistas.NotificationsActivity
 
 class FirebaseMessagingService : FirebaseMessagingService() {

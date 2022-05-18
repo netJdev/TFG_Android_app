@@ -1,10 +1,13 @@
 package com.netjdev.tfg_android_app.vistas
 
 import android.content.ContentValues
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import androidx.preference.PreferenceManager
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityNotificationsBinding
 import com.netjdev.tfg_android_app.sqlite.SQLite
@@ -17,6 +20,9 @@ class NotificationsActivity : AppCompatActivity() {
     // Variable para la vinculacion de vistas
     private lateinit var binding: ActivityNotificationsBinding
 
+    // Variable que almacena el preference manager
+    private lateinit var prefs: SharedPreferences
+
     private var notification_name = ""
     private var notification_body = ""
 
@@ -24,6 +30,8 @@ class NotificationsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNotificationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
         intent.getStringExtra("message_name")?.let {
             notification_name = it
@@ -39,6 +47,7 @@ class NotificationsActivity : AppCompatActivity() {
     private fun initComponents() {
         binding.txtMessageName.text = notification_name
         binding.txtCloseNotification.setOnClickListener { onBackPressed() }
+        binding.txtShowNotification.setOnClickListener { showNotifications() }
 
         // Insertar notificación en SQLite
         insertNotificationSQLite()
@@ -56,12 +65,24 @@ class NotificationsActivity : AppCompatActivity() {
     }
 
     private fun showNotifications() {
-        //intent
-
-        //Finalizar activity
-        finish()
-        //Elimina la animación de cerrar ventana
-        overridePendingTransition(0, 0)
+        Log.d("Sport", "showNotifications: " + prefs.getBoolean("actv_list_notification_open",false))
+        // Se comprueba que la actividad ListOfNotificationsActivity no está abierta, para que no
+        // se abra dos veces.
+        if (!prefs.getBoolean("actv_list_notification_open", false)) {
+            Log.d("Sport", "shared: false")
+            val intent = Intent(this, ListOfNotificationsActivity::class.java)
+            startActivity(intent)
+            //Finalizar activity
+            finish()
+            //Elimina la animación de cerrar ventana
+            overridePendingTransition(0, 0)
+        } else {
+            Log.d("Sport", "shared: true")
+            //Finalizar activity
+            finish()
+            //Elimina la animación de cerrar ventana
+            overridePendingTransition(0, 0)
+        }
     }
 
     // Funcion para volver atras

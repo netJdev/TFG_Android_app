@@ -2,6 +2,7 @@ package com.netjdev.tfg_android_app.vistas
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.preference.PreferenceManager
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -42,6 +44,9 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     // Menu lateral
     private lateinit var drawer: DrawerLayout
     private lateinit var toogle: ActionBarDrawerToggle
+
+    // Variable que almacena el preference manager
+    private lateinit var prefs: SharedPreferences
 
     // Variables de botones
     private lateinit var btnNotifications: Button
@@ -80,6 +85,13 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         navigationView.bringToFront()
 
         intent.getStringExtra("user_email")?.let { user_email = it }
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        // Se inicializa aquí la variable actv_list_notification_open para evitar que se cargue un
+        // valor erróneo si la actividad ListOfNotificationsActivity no se cerró correctamente la última vez.
+        val editor = prefs.edit()
+        editor.putBoolean("actv_list_notification_open", false)
+        editor.apply()
 
         if (user_email.isNotEmpty()) {
             //notifications()
@@ -156,9 +168,7 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun notificationsBTN() {
-        val intent = Intent(this, NotificationsActivity::class.java)
-        intent.putExtra("message_name", "Name")
-        intent.putExtra("message_content", "Body")
+        val intent = Intent(this, ListOfNotificationsActivity::class.java)
         startActivity(intent)
     }
 

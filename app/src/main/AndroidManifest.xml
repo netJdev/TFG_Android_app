@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TFG_Android_app"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".vistas.ListOfNotificationsActivity"
+            android:exported="false" />
+        <activity
             android:name=".vistas.ListOfPaymentsActivity"
             android:exported="false" />
         <activity
@@ -35,8 +38,8 @@
             android:exported="false" />
         <activity
             android:name=".vistas.NotificationsActivity"
-            android:theme="@style/Theme.Transparent"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Transparent" />
         <activity
             android:name=".vistas.PdfViewerActivity"
             android:exported="false" />
