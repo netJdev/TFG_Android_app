@@ -190,6 +190,7 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         // Ir a pantalla de login
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     // Funcion para volver atras
