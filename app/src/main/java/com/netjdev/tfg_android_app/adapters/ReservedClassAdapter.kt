@@ -14,7 +14,6 @@ class ReservedClassAdapter(val reservedClassClick: (UserClass) -> Unit) :
     // Lista que almacena los documentos de una categoria
     var reservedClasses: List<UserClass> = emptyList()
 
-    //
     fun setData(list: List<UserClass>) {
         reservedClasses = list
         notifyDataSetChanged()

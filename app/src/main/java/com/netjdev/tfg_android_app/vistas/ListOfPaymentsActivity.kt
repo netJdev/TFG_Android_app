@@ -54,7 +54,6 @@ class ListOfPaymentsActivity : AppCompatActivity() {
                 (listPaymentsRecyclerView.adapter as PaymentAdapter).setData(
                     listPayments
                 )
-
             }
             .addOnFailureListener {
             }

@@ -1,6 +1,5 @@
 package com.netjdev.tfg_android_app.util
 
-import android.util.Log
 import java.util.*
 
 class Utilities {

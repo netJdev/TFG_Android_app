@@ -14,7 +14,6 @@ class DocumentAdapter(val documentClick: (Document) -> Unit) :
     // Lista que almacena los documentos de una categoria
     var documents: List<Document> = emptyList()
 
-    //
     fun setData(list: List<Document>){
         documents = list
         notifyDataSetChanged()

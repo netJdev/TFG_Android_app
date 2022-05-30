@@ -31,9 +31,6 @@ class NotificationAdapter() :
         holder.itemView.txtNotificationName.text = notifications[position].name
         holder.itemView.txtNotificationDate.text = notifications[position].date
         holder.itemView.txtNotificationBody.text = notifications[position].body
-        /*holder.itemView.setOnClickListener {
-            notificationsClick(notifications[position])
-        }*/
     }
 
     override fun getItemCount(): Int {

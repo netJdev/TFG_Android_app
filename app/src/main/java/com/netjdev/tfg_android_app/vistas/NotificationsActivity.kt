@@ -6,13 +6,10 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import androidx.preference.PreferenceManager
-import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityNotificationsBinding
 import com.netjdev.tfg_android_app.sqlite.SQLite
 import com.netjdev.tfg_android_app.util.Utilities
-import kotlinx.android.synthetic.main.header.*
 import java.util.*
 
 class NotificationsActivity : AppCompatActivity() {

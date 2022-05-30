@@ -22,13 +22,11 @@ class ChatAdapter(val chatClick: (Chat) -> Unit) :
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ChatViewHolder {
         return ChatViewHolder(
-            //
             LayoutInflater.from(viewGroup.context).inflate(R.layout.item_chat, viewGroup, false)
         )
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-        //holder.itemView.chatNameText.text = chats[position].id
         holder.itemView.docTypeNameText.text = chats[position].users.toString()
 
         holder.itemView.setOnClickListener {

@@ -86,16 +86,11 @@ class StripeActivity : AppCompatActivity() {
         // Ocultar progressbar
         binding.includeProgressbar.progressbar.visibility = View.INVISIBLE
 
-        // Inicia el prceso de obtención de credenciales para realizar el pago con Stripe
-        //getCustomerID()
-
         // Realizar pago
-        //binding.btnPay.setOnClickListener { paymentFlow() }
         binding.btnPay.setOnClickListener { getCustomerID() }
         binding.btnPay.isEnabled = false
 
         // Inicializar calendar
-        //calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+2:00"))
         calendar = Calendar.getInstance()
         calendar.time = currentDate
 
@@ -109,7 +104,6 @@ class StripeActivity : AppCompatActivity() {
      */
     private fun checkUserPays() {
         // Mes actual
-        //cuotaActual = Calendar.getInstance(TimeZone.getTimeZone("GMT+0:00"))
         cuotaActual = Calendar.getInstance()
         cuotaActual.time = currentDate
         // Todos los pagos se registran como el día 1 del mes pagado
@@ -118,8 +112,6 @@ class StripeActivity : AppCompatActivity() {
         cuotaActual.set(Calendar.MINUTE, 0)
         cuotaActual.set(Calendar.SECOND, 0)
         cuotaActual.set(Calendar.MILLISECOND, 0)
-        // Cambiar mes pagado para hacer pruebas (0->enero, 1->febrero ...)
-        //cuotaActual.set(Calendar.DAY_OF_MONTH, 0) // Cambiar mes para hacer pruebas
         // Nombre del mes
         val mes = Utilities.getMonthName(cuotaActual)
         // Obtener identificador del mes

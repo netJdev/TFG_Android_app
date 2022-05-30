@@ -14,7 +14,6 @@ class DocCategoryAdapter(val docCategoryClick: (DocCategory) -> Unit) :
     // Lista que almacena las categorias de documentos (nombres de las carpetas)
     var docCategories: List<DocCategory> = emptyList()
 
-    //
     fun setData(list: List<DocCategory>){
         docCategories = list
         notifyDataSetChanged()

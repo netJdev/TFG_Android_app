@@ -62,8 +62,6 @@ class ListOfReservedClassesActivity : AppCompatActivity() {
 
         firestore.collection("users").document(user_email).collection("classes")
             .orderBy("day", Query.Direction.DESCENDING)
-            // Para añadir un segundo orderBy hay que añadir indices en Firestore
-            //.orderBy("time", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener { userClasses ->
                 val listUserClasses = userClasses.toObjects(UserClass::class.java)
@@ -78,10 +76,8 @@ class ListOfReservedClassesActivity : AppCompatActivity() {
                     }
                 }
                 (listReservedClasesRecyclerView.adapter as ReservedClassAdapter).setData(
-                    //listUserClasses
                     listaClasesPendientes
                 )
-
             }
             .addOnFailureListener {
             }

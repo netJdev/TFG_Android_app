@@ -1,7 +1,5 @@
 package com.netjdev.tfg_android_app.modelos
 
-import java.util.*
-
 data class Notification (
     var name: String = "",
     var body: String = "",

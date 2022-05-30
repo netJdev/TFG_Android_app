@@ -36,7 +36,6 @@ class RecuperarPassword : AppCompatActivity() {
 
         // Comprobar que el email introducido es correcto
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            //
             binding.txtEmailReset.error = R.string.wrong_email.toString()
         }
 

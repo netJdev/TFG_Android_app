@@ -7,19 +7,14 @@ import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityMainBinding
-
 
 class MainActivity : AppCompatActivity() {
 
     // Variable para la vinculacion de vistas
     private lateinit var binding: ActivityMainBinding
-
-    // Variable Firestore
-    private var firestore = Firebase.firestore
 
     // Variable para acceder a la autenticacion de Firebase
     private lateinit var auth: FirebaseAuth
@@ -73,7 +68,6 @@ class MainActivity : AppCompatActivity() {
             } else {
                 // Si falla el registro se muestra un mensaje por pantalla
                 task.exception?.let {
-                    //Toast.makeText(baseContext, it.message, Toast.LENGTH_SHORT).show()
                     Toast.makeText(baseContext, R.string.login_failed, Toast.LENGTH_SHORT).show()
                 }
             }

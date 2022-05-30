@@ -14,7 +14,6 @@ class GroupClassAdapter(val groupClassesClick: (GroupClass) -> Unit) :
     // Lista que almacena los documentos de una categoria
     var groupClasses: List<GroupClass> = emptyList()
 
-    //
     fun setData(list: List<GroupClass>) {
         groupClasses = list
         notifyDataSetChanged()

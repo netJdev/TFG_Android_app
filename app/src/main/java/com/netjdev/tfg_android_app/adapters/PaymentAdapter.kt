@@ -16,7 +16,6 @@ class PaymentAdapter(val paymentClick: (Pago) -> Unit) :
     // Lista que almacena los documentos de una categoria
     var payments: List<Pago> = emptyList()
 
-    //
     fun setData(list: List<Pago>) {
         payments = list
         notifyDataSetChanged()

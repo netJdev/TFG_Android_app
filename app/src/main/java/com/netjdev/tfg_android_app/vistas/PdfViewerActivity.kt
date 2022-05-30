@@ -2,7 +2,6 @@ package com.netjdev.tfg_android_app.vistas
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
@@ -72,13 +71,10 @@ class PdfViewerActivity : AppCompatActivity(), OnTapListener, OnPageChangeListen
     }
 
     override fun onTap(e: MotionEvent?): Boolean {
-        //Toast.makeText(this, "Tap", Toast.LENGTH_SHORT).show()
         return true
     }
 
     override fun onPageChanged(page: Int, pageCount: Int) {
-        //Log.d("Sport", "Page: ${page}")
-        //Log.d("Sport", "PageCount: ${pageCount}")
         txtNumPages.text = "${page+1}/${pageCount}"
     }
 

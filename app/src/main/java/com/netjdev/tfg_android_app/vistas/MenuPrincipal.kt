@@ -11,7 +11,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -25,7 +24,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.netjdev.tfg_android_app.R
 import com.netjdev.tfg_android_app.databinding.ActivityMenuPrincipalBinding
-import com.netjdev.tfg_android_app.modelos.Chat
 import kotlinx.android.synthetic.main.activity_menu_principal.*
 
 class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -94,7 +92,6 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         editor.apply()
 
         if (user_email.isNotEmpty()) {
-            //notifications()
             initComponents()
         }
 
@@ -105,10 +102,7 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun notifications() {
-
         if (intent.extras != null) {
-            //Log.d(TAG, "Notificación en segundo plano")
-            //Log.d(TAG, "Intent extra title: ${intent.extras!!.getString("title")}")
         }
 
         // Recibir notificacion dirigida a un solo usuario
@@ -121,15 +115,11 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     private fun initComponents() {
-        // Id de la aplicación
-        //Log.d("Sport", "Package Name: ${BuildConfig.APPLICATION_ID}")
-
         // Recibir data de notificacion
         if (intent.extras != null) {
             val title = intent.extras!!["title"].toString()
             val body = intent.extras!!["body"].toString()
         }
-
 
         // Texto de la cabecera del menu lateral
         val navigationView: NavigationView = findViewById(R.id.nav_view)
@@ -265,38 +255,5 @@ class MenuPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             return true
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    // Listener para saber si han llegado mensajes nuevos
-    private fun checkNewMessages() {
-        // Referencia al usuario
-        val user = firestore.collection("users").document(user_email)
-        // Referencia al chat
-        var chatId = Chat()
-        // Descargar los chats del usuario
-        user.collection("chats")
-            .get()
-            .addOnSuccessListener { chats ->
-                // Casting de los documentos descargados de la coleccion a objetos Chat
-                val listChats = chats.toObjects(Chat::class.java)
-
-                // Si el user no es el admin, se salta este activity y pasa directamente al chat
-                if (user_email != "admin@email.com") {
-                    if (chats.size()!=0){
-                         chatId = listChats[0]
-                    }else{
-                        // Si el chat del usuario con el Admin no existe se crea
-                        //newChatAdmin()
-                    }
-                }
-            }
-        // Actualizacion en tiempo real de la lista de chats
-        user.collection("chats").addSnapshotListener { chats, error ->
-            if (error == null) {
-                Toast.makeText(baseContext, "Mensaje recibido", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(baseContext, R.string.chats_load_failed, Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 }
